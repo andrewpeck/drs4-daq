@@ -31,10 +31,10 @@ struct Header_t {
 };
 
 struct Waveform_t {
-	char           chnheader[2][4];
-	unsigned short chn[2][1024];
-	//   char           chn2_header[4];
-	//   unsigned short chn2[1024];
+	char           chn0_header[4];
+	unsigned short chn0[1024];
+	char           chn1_header[4];
+	unsigned short chn1[1024];
 	//   char           chn3_header[4];
 	//   unsigned short chn3[1024];
 	//   char           chn4_header[4];
@@ -48,7 +48,10 @@ void decode(char *filename) {
 	Header_t header;
 	Waveform_t waveform;
 	Double_t t[1024];
-	Double_t chn[2][1024];// ,chn2[1024];//, chn3[1024], chn4[1024];
+	Double_t chn0[1024];
+	Double_t chn1[1024];
+	//Double_t chn3[1024];
+	//Double_t chn4[1024];
 	Int_t n;
 	unsigned int eventNum; 
 	unsigned short EventDate[7];
@@ -59,6 +62,8 @@ void decode(char *filename) {
 	int CTHtime[2];
 	int FTHtime[2];
 	int PeakTime[2];
+	int CTHFlightTime;
+	int FTHFlightTime;
 
 	// open the binary waveform file
 	FILE *f = fopen(Form("%s.dat", filename), "r");
@@ -69,14 +74,25 @@ void decode(char *filename) {
 	// define the rec tree
 	TTree *rec = new TTree("rec","rec");
 	rec->Branch("t", &t   ,"t[1024]/D");  
-	rec->Branch("chn1", &chn[0],"chn[0][1024]/D");
-	rec->Branch("chn2", &chn[1],"chn[1][1024]/D");
 	rec->Branch("eventNum", &eventNum ,"eventNum/I");
 	rec->Branch("EventDate", &EventDate ,"EventDate");
+
+	rec->Branch("chn0", &chn0, "chn0[1024]/D");
+	rec->Branch("IntegratedCharge0", &Qint[0] ,"IntegratedCharge0/D");
+	rec->Branch("PeakVoltage0", &Vpeak[0],	"PeakVoltage0/D");
+	rec->Branch("PeakTime0", &PeakTime[0],	"PeakTime0/D");
+	rec->Branch("CTHtime0", &CTHtime[0],	"CTHtime0/I");
+	rec->Branch("FTHtime0", &FTHtime[0],	"FTHtime0/I");
+
+	rec->Branch("chn1", &chn1,"chn1[1024]/D");
 	rec->Branch("IntegratedCharge1", &Qint[0] ,"IntegratedCharge1/D");
-	rec->Branch("PeakVoltage1", &Vpeak[0],	"PeakVoltage1/D");
-	rec->Branch("CTHtime1", &CTHtime[0],	"CTHtime1/I");
-	rec->Branch("FTHtime1", &FTHtime[0],	"FTHtime1/I");
+	rec->Branch("PeakVoltage1", &Vpeak[1],	"PeakVoltage1/D");
+	rec->Branch("PeakTime1", &PeakTime[1],	"PeakTime1/D");
+	rec->Branch("CTHtime1", &CTHtime[1],	"CTHtime1/I");
+	rec->Branch("FTHtime1", &FTHtime[1],	"FTHtime1/I");
+
+	rec->Branch("CTHFlightTime", &CTHFlightTime,	"CTHFlightTime/I");
+	rec->Branch("FTHFlightTime", &FTHFlightTime,	"FTHFlightTime/I");
 
 	//   rec->Branch("chn3", &chn3 ,"chn3[1024]/D");
 	//   rec->Branch("chn4", &chn4 ,"chn4[1024]/D");
@@ -105,53 +121,108 @@ void decode(char *filename) {
 
 		fread(&waveform, sizeof(waveform), 1, f);
 
-		Qint[0]=0;
-		Vpeak[0]=0;
+		memset(Qint, 0, sizeof(Qint));
+		memset(Vpeak, 0, sizeof(Vpeak));
+		memset(PeakTime, 0, sizeof(PeakTime));
 
-		// decode amplitudes in mV
+		cout << sizeof(waveform) << "\n";
+
+		// decode amplitudes in mV and find Peak Voltage
 		for (Int_t i=0; i<1024; i++) 
 		{
-			chn[0][i] = (Double_t) ((waveform.chn[0][i]) / 65535. - 0.5) * 1000;   
-			if (chn[0][i] < Vpeak[0])
+			chn0[i] = (Double_t) ((waveform.chn0[i]) / 65535. - 0.5) * 1000;   
+			if (chn0[i] < Vpeak[0])
 			{
-				Vpeak[0]=chn[0][i];
+				Vpeak[0]=chn0[i];
 				PeakTime[0]=i;
+//				if (i<1024 && n==1)
+				//{
+			//		cout << chn0[i] << "\n";	
+			//		cout << Vpeak[0] << "\n";	
+			//		cout << PeakTime[0] << "\n"; 
+				//}
 			}
 
-			//chn2[i] = (Double_t) ((waveform.chn2[i]) / 65535. - 0.5) * 1000;   
-			//chn3[i] = (Double_t) ((waveform.chn3[i]) / 65535. - 0.5) * 1000;   
-			//chn4[i] = (Double_t) ((waveform.chn4[i]) / 65535. - 0.5) * 1000;   
+			chn1[i] = (Double_t) ((waveform.chn1[i]) / 65535. - 0.5) * 1000;   
+			if (chn1[i] < Vpeak[0])
+			{
+				Vpeak[1]=chn1[i];
+				PeakTime[1]=i;
+			}
+
+			//chn2[i] = (Double_t) ((waveform.chn3[i]) / 65535. - 0.5) * 1000;   
+			//chn3[i] = (Double_t) ((waveform.chn4[i]) / 65535. - 0.5) * 1000;   
 		}
 
 		bool FTHCrossed=false;
 		bool CTHCrossed=false;
 
-		for (Int_t i=(PeakTime[0]-50); i<PeakTime[0]+50; i++) 
+		//Cross Times for Channel 1
+		for (Int_t i=0; i<1024; i++) 
 		{
-			Qint[0]+=chn[0][i];
+			//Integrate Charge
+			Qint[0]+=chn0[i];
+			//Find Constant Threshold Cross Time
 			if (CTHCrossed==false)
 			{
-				if (chn[0][i] < Vthresh) 
+				if (chn0[i] < Vthresh) 
 				{
 					CTHtime[0]=i;
 					CTHCrossed=true;
 				}
 			}
 
+			//Find Fractional Threshold Cross Time
 			if (FTHCrossed==false)
 			{
-				if (chn[0][i] < (Vpeak[0]*fraction))
+				if (chn0[i] < (Vpeak[0]*fraction))
 				{
 					FTHtime[0]=i;
 					FTHCrossed=true;
 				}
 			}
 		}
+
+		FTHCrossed=false;
+		CTHCrossed=false;
+
+		//Cross Times for Channel 2
+		for (Int_t i=0; i<1024; i++) 
+		{
+			//Integrate Charge
+			Qint[1]+=chn1[i];
+			//Find Constant Threshold Cross Time
+			if (CTHCrossed==false)
+			{
+				if (chn1[i] < Vthresh) 
+				{
+					CTHtime[1]=i;
+					CTHCrossed=true;
+				}
+			}
+
+			//Find Fractional Threshold Cross Time
+			if (FTHCrossed==false)
+			{
+				if (chn1[i] < (Vpeak[1]*fraction))
+				{
+					FTHtime[1]=i;
+					FTHCrossed=true;
+				}
+			}
+		}
+
+		CTHFlightTime=CTHtime[1]-CTHtime[0];
+		FTHFlightTime=FTHtime[1]-FTHtime[0];
+
+
+		//Fill Histograms
 		rec->Fill();
 	}
 
 	// draw channel #4
-	rec->Draw("chn[0]:t");
+	rec->Draw("chn0:t");
+	//rec->Draw("chn1:t");
 
 	// print number of events
 	cout<<n<<" events processed"<<endl;
