@@ -1,0 +1,14 @@
+Usage: ./main [option]
+If no option is provided, the program will perform measurement with default settings: sampling rate 1 GHz, input range -0.5 - +0.5 V, software (forced) trigger, delay 0 ns, result will be written to output/test.root
+Available options are:
+	-h: show this help 
+	-i: show some information of the board, for testing purpose
+	-c: do voltage calibration for the board, it will ask for sampling rate and range 
+	-o: set ouput file name 
+	-r: set run number, then the output file will be output/runXXXXX.root
+	-l: set trigger level in V 
+	-f: set sampling rate (frequency) in GHz
+	-t: set trigger source, 1: ch1, 2:ch2, 3:ch3, 4:ch4, 5: external
+	-i: set midpoint of the input range in V, the range will be [midpoint - 0.5; midpoint +0.5]. Acceptable midpoint is from 0.0 V to 0.5 V
+
+This is a test for post-comit hook

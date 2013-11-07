@@ -1,0 +1,914 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AnalyzeWF	drv/DRS.cpp	/^int DRSBoard::AnalyzeWF(int nIter, float wf[kNumberOfBins], int tCell, double cellT[kNumberOfBins])$/;"	f	class:DRSBoard
+Approx	drv/DRS.cpp	/^int ResponseCalibration::Approx(float *p, float *uu, int np, int nu, float *coef)$/;"	f	class:ResponseCalibration
+Average	drv/DRS.cpp	/^void ResponseCalibration::Average(int method, float *points, int numberOfPoints, float &mean, float &error,$/;"	f	class:ResponseCalibration
+AverageWaveforms	drv/DRS.cpp	/^int DRSBoard::AverageWaveforms(DRSCallback *pcb, int nChip, int nChan, $/;"	f	class:DRSBoard
+BIT_ACAL_EN	drv/DRS.h	131;"	d
+BIT_ADCCLK_INVERT	drv/DRS.h	133;"	d
+BIT_ADC_ACTIVE	drv/DRS.h	118;"	d
+BIT_CONFIG_DMODE	drv/DRS.h	143;"	d
+BIT_CONFIG_PLLEN	drv/DRS.h	144;"	d
+BIT_CONFIG_WSRLOOP	drv/DRS.h	145;"	d
+BIT_DACTIVE	drv/DRS.h	135;"	d
+BIT_DECIMATION	drv/DRS.h	138;"	d
+BIT_DELAYED_START	drv/DRS.h	128;"	d
+BIT_DMODE	drv/DRS.h	117;"	d
+BIT_EEPROM_READ_TRIG	drv/DRS.h	115;"	d
+BIT_EEPROM_WRITE_TRIG	drv/DRS.h	114;"	d
+BIT_ENABLE_TRIGGER1	drv/DRS.h	125;"	d
+BIT_ENABLE_TRIGGER2	drv/DRS.h	140;"	d
+BIT_FREQ_AUTO_ADJ	drv/DRS.h	123;"	d
+BIT_LED	drv/DRS.h	119;"	d
+BIT_LMK_LOCKED	drv/DRS.h	157;"	d
+BIT_LONG_START_PULSE	drv/DRS.h	126;"	d
+BIT_MULTI_BUFFER	drv/DRS.h	116;"	d
+BIT_NEG_TRIGGER	drv/DRS.h	130;"	d
+BIT_NEW_FREQ1	drv/DRS.h	150;"	d
+BIT_NEW_FREQ2	drv/DRS.h	151;"	d
+BIT_PLL_LOCKED0	drv/DRS.h	152;"	d
+BIT_PLL_LOCKED1	drv/DRS.h	153;"	d
+BIT_PLL_LOCKED2	drv/DRS.h	154;"	d
+BIT_PLL_LOCKED3	drv/DRS.h	155;"	d
+BIT_READOUT_MODE	drv/DRS.h	127;"	d
+BIT_REFCLK_EXT	drv/DRS.h	134;"	d
+BIT_REFCLK_SOURCE	drv/DRS.h	122;"	d
+BIT_REINIT_TRIG	drv/DRS.h	112;"	d
+BIT_RUNNING	drv/DRS.h	149;"	d
+BIT_SERIAL_BUSY	drv/DRS.h	156;"	d
+BIT_SOFT_TRIG	drv/DRS.h	113;"	d
+BIT_STANDBY_MODE	drv/DRS.h	136;"	d
+BIT_START_TRIG	drv/DRS.h	111;"	d
+BIT_TCAL_EN	drv/DRS.h	120;"	d
+BIT_TCAL_SOURCE	drv/DRS.h	121;"	d
+BIT_TRANSP_MODE	drv/DRS.h	124;"	d
+BIT_TRIGGER_DELAYED	drv/DRS.h	132;"	d
+BIT_TR_SOURCE1	drv/DRS.h	137;"	d
+BIT_TR_SOURCE2	drv/DRS.h	139;"	d
+CFLAGS	Makefile	/^	CFLAGS        = -g -O2 -Wall -Wuninitialized -fno-strict-aliasing -I$(DRVDIR) -DOS_LINUX -DHAVE_LIBUSB $/;"	m
+CFLAGS	Makefile	/^	CFLAGS        = -g -O2 -Wall -Wuninitialized -fno-strict-aliasing -I$(DRVDIR) -I\/opt\/local\/include -DOS_LINUX -DHAVE_LIBUSB $/;"	m
+COMMENT_NODE	drv/mxml.h	22;"	d
+CURRENTDIR	Makefile	/^CURRENTDIR = $(shell pwd)$/;"	m
+CalculateBSpline	drv/DRS.cpp	/^int ResponseCalibration::CalibrationData::CalculateBSpline(int nGrid, float value, float *bsplines)$/;"	f	class:ResponseCalibration::CalibrationData
+Calibrate	drv/DRS.cpp	/^bool ResponseCalibration::Calibrate(unsigned int chipIndex, unsigned int channel, unsigned short *adcWaveform,$/;"	f	class:ResponseCalibration
+Calibrate	test.cpp	/^int Calibrate()$/;"	f
+CalibrateTiming	drv/DRS.cpp	/^int DRSBoard::CalibrateTiming(DRSCallback *pcb)$/;"	f	class:DRSBoard
+CalibrateVolt	drv/DRS.cpp	/^int DRSBoard::CalibrateVolt(DRSCallback *pcb)$/;"	f	class:DRSBoard
+CalibrateWaveform	drv/DRS.cpp	/^int DRSBoard::CalibrateWaveform(unsigned int chipIndex, unsigned char channel, unsigned short *adcWaveform,$/;"	f	class:DRSBoard
+CalibrationData	drv/DRS.cpp	/^ResponseCalibration::CalibrationData::CalibrationData(int numberOfGridPoints)$/;"	f	class:ResponseCalibration::CalibrationData
+CalibrationData	drv/DRS.h	/^   class CalibrationData {$/;"	c	class:ResponseCalibration
+CalibrationDataChannel	drv/DRS.h	/^         CalibrationDataChannel(int numberOfGridPoints)$/;"	f	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+CalibrationDataChannel	drv/DRS.h	/^      class CalibrationDataChannel {$/;"	c	class:ResponseCalibration::CalibrationData
+CalibrationStart	drv/DRS.cpp	/^void ResponseCalibration::CalibrationStart(double voltage)$/;"	f	class:ResponseCalibration
+CalibrationTrigger	drv/DRS.cpp	/^void ResponseCalibration::CalibrationTrigger(int mode, double voltage)$/;"	f	class:ResponseCalibration
+Channel2Input	drv/DRS.h	/^int DRSBoard::Channel2Input(int channel) const$/;"	f	class:DRSBoard
+Channel2ReadoutChannel	drv/DRS.h	/^int DRSBoard::Channel2ReadoutChannel(int channel) const$/;"	f	class:DRSBoard
+ChipTest	drv/DRS.cpp	/^int DRSBoard::ChipTest()$/;"	f	class:DRSBoard
+Class	libs/TEventDict.cpp	/^TClass *TEvent::Class()$/;"	f	class:TEvent
+Class_Name	libs/TEventDict.cpp	/^const char *TEvent::Class_Name()$/;"	f	class:TEvent
+ConfigureLMK	drv/DRS.cpp	/^int DRSBoard::ConfigureLMK(double sampFreq, bool freqChange, int calFreq, int calPhase)$/;"	f	class:DRSBoard
+ConstructBoard	drv/DRS.cpp	/^void DRSBoard::ConstructBoard()$/;"	f	class:DRSBoard
+DIR_SEPARATOR	drscl.cpp	21;"	d	file:
+DIR_SEPARATOR	drscl.cpp	32;"	d	file:
+DIR_SEPARATOR	drv/mxml.h	32;"	d
+DIR_SEPARATOR	drv/mxml.h	34;"	d
+DIR_SEPARATOR	test.cpp	18;"	d	file:
+DOCUMENT_NODE	drv/mxml.h	23;"	d
+DRS	drv/DRS.cpp	/^DRS::DRS()$/;"	f	class:DRS
+DRS	drv/DRS.h	/^class DRS {$/;"	c
+DRS4OBJ	Makefile	/^DRS4OBJ = $(OBJDIR)\/DRS.o $/;"	m
+DRSBoard	drv/DRS.cpp	/^DRSBoard::DRSBoard(MUSB_INTERFACE * musb_interface, int usb_slot)$/;"	f	class:DRSBoard
+DRSBoard	drv/DRS.cpp	/^DRSBoard::DRSBoard(MVME_INTERFACE * mvme_interface, mvme_addr_t base_address, int slot_number)$/;"	f	class:DRSBoard
+DRSBoard	drv/DRS.h	/^class DRSBoard {$/;"	c
+DRSBoardConstants	drv/DRS.h	/^enum DRSBoardConstants {$/;"	g
+DRSCallback	drv/DRS.h	/^class DRSCallback$/;"	c
+DRSErrorCodes	drv/DRS.h	/^enum DRSErrorCodes {$/;"	g
+DRS_H	drv/DRS.h	8;"	d
+DRVDIR	Makefile	/^DRVDIR = $(shell pwd)\/drv$/;"	m
+Debug	drv/DRS.h	/^   int          Debug() { return fDebug; }$/;"	f	class:DRSBoard
+DecodeWave	drv/DRS.cpp	/^int DRSBoard::DecodeWave(unsigned char *waveforms, unsigned int chipIndex, unsigned char channel,$/;"	f	class:DRSBoard
+DecodeWave	drv/DRS.cpp	/^int DRSBoard::DecodeWave(unsigned int chipIndex, unsigned char channel, unsigned short *waveform)$/;"	f	class:DRSBoard
+DeleteFields	drv/DRS.cpp	/^void ResponseCalibration::DeleteFields()$/;"	f	class:ResponseCalibration
+DeletePreCalculatedBSpline	drv/DRS.cpp	/^void ResponseCalibration::CalibrationData::DeletePreCalculatedBSpline()$/;"	f	class:ResponseCalibration::CalibrationData
+Dictionary	libs/TEventDict.cpp	/^void TEvent::Dictionary()$/;"	f	class:TEvent
+ELEMENT_NODE	drv/mxml.h	19;"	d
+EXPRT	drv/musbstd.h	66;"	d
+EXPRT	drv/musbstd.h	68;"	d
+EXPRT	drv/mxml.h	74;"	d
+EXPRT	drv/mxml.h	76;"	d
+EXPRT	drv/strlcpy.h	21;"	d
+EXPRT	drv/strlcpy.h	23;"	d
+EXTERNAL_ENTITY	drv/mxml.h	26;"	d
+EnableAcal	drv/DRS.cpp	/^int DRSBoard::EnableAcal(int mode, double voltage)$/;"	f	class:DRSBoard
+EnableTcal	drv/DRS.cpp	/^int DRSBoard::EnableTcal(int freq, int level, int phase)$/;"	f	class:DRSBoard
+EnableTrigger	drv/DRS.cpp	/^int DRSBoard::EnableTrigger(int flag1, int flag2)$/;"	f	class:DRSBoard
+F1	drv/DRS.cpp	4771;"	d	file:
+F2	drv/DRS.cpp	4772;"	d	file:
+FALSE	drv/mxml.c	59;"	d	file:
+FinishClearCycle	drv/DRS.cpp	/^int DRSBoard::FinishClearCycle()$/;"	f	class:DRSBoard
+FitCalibrationPoints	drv/DRS.cpp	/^bool ResponseCalibration::FitCalibrationPoints(int chipNumber)$/;"	f	class:ResponseCalibration
+FitCalibrationPointsV3	drv/DRS.cpp	/^bool ResponseCalibration::FitCalibrationPointsV3(int chipNumber)$/;"	f	class:ResponseCalibration
+FitCalibrationPointsV4	drv/DRS.cpp	/^bool ResponseCalibration::FitCalibrationPointsV4(int chipNumber)$/;"	f	class:ResponseCalibration
+FreqToVolt	drv/DRS.cpp	/^double DRSBoard::FreqToVolt(double freq)$/;"	f	class:DRSBoard
+FrequencyData	drv/DRS.h	/^      class FrequencyData {$/;"	c	class:DRSBoard::TimeData
+GEVPC_BASE_ADDR	drv/DRS.cpp	101;"	d	file:
+GEVPC_USER_FPGA	drv/DRS.cpp	103;"	d	file:
+GEVPC_WINSIZE	drv/DRS.cpp	102;"	d	file:
+G__ANSIHEADER	libs/TEventDict.h	15;"	d
+G__DICTIONARY	libs/TEventDict.h	16;"	d
+G__PRIVATE_GVALUE	libs/TEventDict.h	17;"	d
+G__ROOT	libs/TEventDict.cpp	25;"	d	file:
+G__Sizep2memfuncTEventDict	libs/TEventDict.cpp	/^  G__Sizep2memfuncTEventDict(): p(&G__Sizep2memfuncTEventDict::sizep2memfunc) {}$/;"	f	class:G__Sizep2memfuncTEventDict
+G__Sizep2memfuncTEventDict	libs/TEventDict.cpp	/^class G__Sizep2memfuncTEventDict {$/;"	c	file:
+G__TEventDictLN_TBuffer	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TBuffer = { "TBuffer" , 99 , -1 };$/;"	v
+G__TEventDictLN_TClass	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TClass = { "TClass" , 99 , -1 };$/;"	v
+G__TEventDictLN_TEvent	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TEvent = { "TEvent" , 99 , -1 };$/;"	v
+G__TEventDictLN_TMemberInspector	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TMemberInspector = { "TMemberInspector" , 99 , -1 };$/;"	v
+G__TEventDictLN_TObject	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TObject = { "TObject" , 99 , -1 };$/;"	v
+G__TEventDictLN_TVectorTlEdoublegR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TVectorTlEdoublegR = { "TVectorT<double>" , 99 , -1 };$/;"	v
+G__TEventDictLN_TVectorTlEfloatgR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_TVectorTlEfloatgR = { "TVectorT<float>" , 99 , -1 };$/;"	v
+G__TEventDictLN_reverse_iteratorlEvectorlEROOTcLcLTSchemaHelpercOallocatorlEROOTcLcLTSchemaHelpergRsPgRcLcLiteratorgR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_reverse_iteratorlEvectorlEROOTcLcLTSchemaHelpercOallocatorlEROOTcLcLTSchemaHelpergRsPgRcLcLiteratorgR = { "reverse_iterator<vector<ROOT::TSchemaHelper,allocator<ROOT::TSchemaHelper> >::iterator>" , 99 , -1 };$/;"	v
+G__TEventDictLN_reverse_iteratorlEvectorlETVirtualArraymUcOallocatorlETVirtualArraymUgRsPgRcLcLiteratorgR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_reverse_iteratorlEvectorlETVirtualArraymUcOallocatorlETVirtualArraymUgRsPgRcLcLiteratorgR = { "reverse_iterator<vector<TVirtualArray*,allocator<TVirtualArray*> >::iterator>" , 99 , -1 };$/;"	v
+G__TEventDictLN_vectorlEROOTcLcLTSchemaHelpercOallocatorlEROOTcLcLTSchemaHelpergRsPgR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_vectorlEROOTcLcLTSchemaHelpercOallocatorlEROOTcLcLTSchemaHelpergRsPgR = { "vector<ROOT::TSchemaHelper,allocator<ROOT::TSchemaHelper> >" , 99 , -1 };$/;"	v
+G__TEventDictLN_vectorlETVirtualArraymUcOallocatorlETVirtualArraymUgRsPgR	libs/TEventDict.cpp	/^G__linked_taginfo G__TEventDictLN_vectorlETVirtualArraymUcOallocatorlETVirtualArraymUgRsPgR = { "vector<TVirtualArray*,allocator<TVirtualArray*> >" , 99 , -1 };$/;"	v
+G__TEventDict_216_0_1	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_1(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_10	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_10(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_11	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_11(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_12	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_12(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_13	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_13(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_17	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_17(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_18	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_18(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_19	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_19(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_2	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_2(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_20	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_20(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_21	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_21(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_22	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_22(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_23	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_23(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_24	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_24(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_3	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_3(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_4	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_4(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_5	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_5(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_6	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_6(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_7	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_7(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_8	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_8(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TEventDict_216_0_9	libs/TEventDict.cpp	/^static int G__TEventDict_216_0_9(G__value* result7, G__CONST char* funcname, struct G__param* libp, int hash)$/;"	f	file:
+G__TTEvent	libs/TEventDict.cpp	/^typedef TEvent G__TTEvent;$/;"	t	file:
+G__cpp_dllrevTEventDict	libs/TEventDict.cpp	/^extern "C" int G__cpp_dllrevTEventDict() { return(30051515); }$/;"	f
+G__cpp_reset_tagtableTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_reset_tagtableTEventDict() {$/;"	f
+G__cpp_setupTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setupTEventDict(void) {$/;"	f
+G__cpp_setup_func0	libs/TEventDict.cpp	/^static void G__cpp_setup_func0() {$/;"	f	file:
+G__cpp_setup_func1	libs/TEventDict.cpp	/^static void G__cpp_setup_func1() {$/;"	f	file:
+G__cpp_setup_func10	libs/TEventDict.cpp	/^static void G__cpp_setup_func10() {$/;"	f	file:
+G__cpp_setup_func11	libs/TEventDict.cpp	/^static void G__cpp_setup_func11() {$/;"	f	file:
+G__cpp_setup_func12	libs/TEventDict.cpp	/^static void G__cpp_setup_func12() {$/;"	f	file:
+G__cpp_setup_func13	libs/TEventDict.cpp	/^static void G__cpp_setup_func13() {$/;"	f	file:
+G__cpp_setup_func2	libs/TEventDict.cpp	/^static void G__cpp_setup_func2() {$/;"	f	file:
+G__cpp_setup_func3	libs/TEventDict.cpp	/^static void G__cpp_setup_func3() {$/;"	f	file:
+G__cpp_setup_func4	libs/TEventDict.cpp	/^static void G__cpp_setup_func4() {$/;"	f	file:
+G__cpp_setup_func5	libs/TEventDict.cpp	/^static void G__cpp_setup_func5() {$/;"	f	file:
+G__cpp_setup_func6	libs/TEventDict.cpp	/^static void G__cpp_setup_func6() {$/;"	f	file:
+G__cpp_setup_func7	libs/TEventDict.cpp	/^static void G__cpp_setup_func7() {$/;"	f	file:
+G__cpp_setup_func8	libs/TEventDict.cpp	/^static void G__cpp_setup_func8() {$/;"	f	file:
+G__cpp_setup_func9	libs/TEventDict.cpp	/^static void G__cpp_setup_func9() {$/;"	f	file:
+G__cpp_setup_funcTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_funcTEventDict() {$/;"	f
+G__cpp_setup_global0	libs/TEventDict.cpp	/^static void G__cpp_setup_global0() {$/;"	f	file:
+G__cpp_setup_global1	libs/TEventDict.cpp	/^static void G__cpp_setup_global1() {$/;"	f	file:
+G__cpp_setup_globalTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_globalTEventDict() {$/;"	f
+G__cpp_setup_inheritanceTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_inheritanceTEventDict() {$/;"	f
+G__cpp_setup_initTEventDict	libs/TEventDict.cpp	/^    G__cpp_setup_initTEventDict() { G__add_setup_func("TEventDict",(G__incsetup)(&G__cpp_setupTEventDict)); G__call_setup_funcs(); }$/;"	f	class:G__cpp_setup_initTEventDict
+G__cpp_setup_initTEventDict	libs/TEventDict.cpp	/^class G__cpp_setup_initTEventDict {$/;"	c	file:
+G__cpp_setup_initializerTEventDict	libs/TEventDict.cpp	/^G__cpp_setup_initTEventDict G__cpp_setup_initializerTEventDict;$/;"	v
+G__cpp_setup_memfuncTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_memfuncTEventDict() {$/;"	f
+G__cpp_setup_memvarTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_memvarTEventDict() {$/;"	f
+G__cpp_setup_tagtableTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_tagtableTEventDict() {$/;"	f
+G__cpp_setup_typetableTEventDict	libs/TEventDict.cpp	/^extern "C" void G__cpp_setup_typetableTEventDict() {$/;"	f
+G__get_sizep2memfuncTEventDict	libs/TEventDict.cpp	/^size_t G__get_sizep2memfuncTEventDict()$/;"	f
+G__set_cpp_environmentTEventDict	libs/TEventDict.cpp	/^extern "C" void G__set_cpp_environmentTEventDict() {$/;"	f
+G__setup_memfuncTEvent	libs/TEventDict.cpp	/^static void G__setup_memfuncTEvent(void) {$/;"	f	file:
+G__setup_memvarTEvent	libs/TEventDict.cpp	/^static void G__setup_memvarTEvent(void) {$/;"	f	file:
+GenerateInitInstance	libs/TEventDict.cpp	/^   TGenericClassInfo *GenerateInitInstance(const ::TEvent*)$/;"	f	namespace:ROOT
+GenerateInitInstanceLocal	libs/TEventDict.cpp	/^   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TEvent*)$/;"	f	namespace:ROOT
+GetAcalMode	drv/DRS.h	/^   int          GetAcalMode() { return fAcalMode; }$/;"	f	class:DRSBoard
+GetAcalVolt	drv/DRS.h	/^   double       GetAcalVolt() { return fAcalVolt; }$/;"	f	class:DRSBoard
+GetBoard	drv/DRS.h	/^   DRSBoard        *GetBoard(int i) { return fBoard[i]; }$/;"	f	class:DRS
+GetBoardSerialNumber	drv/DRS.h	/^   int          GetBoardSerialNumber() const { return fBoardSerialNumber; }$/;"	f	class:DRSBoard
+GetBoardType	drv/DRS.h	/^   int          GetBoardType() const { return fBoardType; }$/;"	f	class:DRSBoard
+GetBoards	drv/DRS.h	/^   DRSBoard       **GetBoards() { return fBoard; }$/;"	f	class:DRS
+GetCalibratedFrequency	drv/DRS.h	/^   double       GetCalibratedFrequency(void) { return fTimingCalibratedFrequency; }$/;"	f	class:DRSBoard
+GetCalibratedInputRange	drv/DRS.h	/^   double       GetCalibratedInputRange(void) { return fCellCalibratedRange; }$/;"	f	class:DRSBoard
+GetCalibrationDirectory	drv/DRS.cpp	/^void DRSBoard::GetCalibrationDirectory(char *calibrationDirectoryPath)$/;"	f	class:DRSBoard
+GetChannelCascading	drv/DRS.h	/^   int          GetChannelCascading() const { return fChannelCascading; }$/;"	f	class:DRSBoard
+GetChannelDepth	drv/DRS.h	/^   int          GetChannelDepth() const { return fChannelDepth; }$/;"	f	class:DRSBoard
+GetClockChannel	drv/DRS.h	/^int DRSBoard::GetClockChannel() const$/;"	f	class:DRSBoard
+GetClockInput	drv/DRS.h	/^   inline int   GetClockInput() const { return Channel2Input(GetClockChannel()); }$/;"	f	class:DRSBoard
+GetConfigReg	drv/DRS.cpp	/^unsigned short DRSBoard::GetConfigReg()$/;"	f	class:DRSBoard
+GetCtrlReg	drv/DRS.cpp	/^unsigned int DRSBoard::GetCtrlReg()$/;"	f	class:DRSBoard
+GetDRSType	drv/DRS.h	/^   int          GetDRSType() const { return fDRSType; }$/;"	f	class:DRSBoard
+GetDecimation	drv/DRS.h	/^   int          GetDecimation() { return fDecimation; }$/;"	f	class:DRSBoard
+GetError	drv/DRS.cpp	/^bool DRS::GetError(char *str, int size)$/;"	f	class:DRS
+GetExternalClockFrequency	drv/DRS.cpp	/^double DRSBoard::GetExternalClockFrequency()$/;"	f	class:DRSBoard
+GetFirmwareVersion	drv/DRS.h	/^   int          GetFirmwareVersion() const { return fFirmwareVersion; }$/;"	f	class:DRSBoard
+GetFrequency	drv/DRS.h	/^   double       GetFrequency() const { return fFrequency; }$/;"	f	class:DRSBoard
+GetGainAt	drv/DRS.h	/^   double GetGainAt(int chip,int chn,int bin) const { return fCalibrationData[chip]->fChannel[chn]->fGain[bin]; };$/;"	f	class:ResponseCalibration
+GetId	libs/TEvent.h	/^		inline int GetId(){ return fId;}$/;"	f	class:TEvent
+GetInputRange	drv/DRS.h	/^   double       GetInputRange(void) { return fRange; }$/;"	f	class:DRSBoard
+GetMeasPointXAt	drv/DRS.h	/^   double GetMeasPointXAt(int ip) const { return fXXSave[ip]; };$/;"	f	class:ResponseCalibration
+GetMeasPointYAt	drv/DRS.h	/^   double GetMeasPointYAt(int ip) const { return fYYSave[ip]; };$/;"	f	class:ResponseCalibration
+GetMultiBufferRP	drv/DRS.cpp	/^int DRSBoard::GetMultiBufferRP(void)$/;"	f	class:DRSBoard
+GetMultiBufferWP	drv/DRS.cpp	/^int DRSBoard::GetMultiBufferWP(void)$/;"	f	class:DRSBoard
+GetNumberOfBoards	drv/DRS.h	/^   int              GetNumberOfBoards() const { return fNumberOfBoards; }$/;"	f	class:DRS
+GetNumberOfCalibInputs	drv/DRS.h	/^int DRSBoard::GetNumberOfCalibInputs() const$/;"	f	class:DRSBoard
+GetNumberOfChannels	drv/DRS.h	/^   int          GetNumberOfChannels() const { return fNumberOfChannels; }$/;"	f	class:DRSBoard
+GetNumberOfChips	drv/DRS.h	/^   int          GetNumberOfChips() const { return fNumberOfChips; }$/;"	f	class:DRSBoard
+GetNumberOfInputs	drv/DRS.h	/^int DRSBoard::GetNumberOfInputs() const$/;"	f	class:DRSBoard
+GetNumberOfReadoutChannels	drv/DRS.h	/^int DRSBoard::GetNumberOfReadoutChannels() const$/;"	f	class:DRSBoard
+GetOffsetAt	drv/DRS.h	/^   double GetOffsetAt(int chip,int chn,int bin) const { return fCalibrationData[chip]->fChannel[chn]->fOffset[bin]; };$/;"	f	class:ResponseCalibration
+GetPrecision	drv/DRS.h	/^   double       GetPrecision() const { return fResponseCalibration ? fResponseCalibration->GetPrecision() : 0.1; }$/;"	f	class:DRSBoard
+GetPrecision	drv/DRS.h	/^   double GetPrecision() const { return fPrecision; };$/;"	f	class:ResponseCalibration
+GetRawWave	drv/DRS.cpp	/^int DRSBoard::GetRawWave(unsigned char *waveforms, unsigned int chipIndex, unsigned char channel, $/;"	f	class:DRSBoard
+GetRawWave	drv/DRS.cpp	/^int DRSBoard::GetRawWave(unsigned int chipIndex, unsigned char channel, unsigned short *waveform,$/;"	f	class:DRSBoard
+GetReadoutChannelConfig	drv/DRS.h	/^   int          GetReadoutChannelConfig() { return fReadoutChannelConfig; }$/;"	f	class:DRSBoard
+GetRefclk	drv/DRS.h	/^   int          GetRefclk() { return fRefclk; }$/;"	f	class:DRSBoard
+GetRegulationDAC	drv/DRS.cpp	/^int DRSBoard::GetRegulationDAC(double *value)$/;"	f	class:DRSBoard
+GetRequiredFirmwareVersion	drv/DRS.h	/^   int          GetRequiredFirmwareVersion() const { return fRequiredFirmwareVersion; }$/;"	f	class:DRSBoard
+GetResponseCalibration	drv/DRS.h	/^   ResponseCalibration *GetResponseCalibration() const { return fResponseCalibration; }$/;"	f	class:DRSBoard
+GetSlotNumber	drv/DRS.h	/^   int          GetSlotNumber() const { return fSlotNumber; }$/;"	f	class:DRSBoard
+GetStatusReg	drv/DRS.cpp	/^unsigned int DRSBoard::GetStatusReg()$/;"	f	class:DRSBoard
+GetStopCell	drv/DRS.cpp	/^int DRSBoard::GetStopCell(unsigned int chipIndex)$/;"	f	class:DRSBoard
+GetStopWSR	drv/DRS.cpp	/^unsigned char DRSBoard::GetStopWSR(unsigned int chipIndex)$/;"	f	class:DRSBoard
+GetStretchedTime	drv/DRS.cpp	/^int DRSBoard::GetStretchedTime(float *time, float *measurement, int numberOfMeasurements, float period)$/;"	f	class:DRSBoard
+GetTcalFreq	drv/DRS.h	/^   int          GetTcalFreq() { return fTcalFreq; }$/;"	f	class:DRSBoard
+GetTcalLevel	drv/DRS.h	/^   int          GetTcalLevel() { return fTcalLevel; }$/;"	f	class:DRSBoard
+GetTcalPhase	drv/DRS.h	/^   int          GetTcalPhase() { return fTcalPhase; }$/;"	f	class:DRSBoard
+GetTcalSource	drv/DRS.h	/^   int          GetTcalSource() { return fTcalSource; }$/;"	f	class:DRSBoard
+GetTemperature	drv/DRS.cpp	/^double DRSBoard::GetTemperature()$/;"	f	class:DRSBoard
+GetTemperature	drv/DRS.cpp	/^double ResponseCalibration::GetTemperature(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+GetTime	drv/DRS.cpp	/^int DRSBoard::GetTime(unsigned int chipIndex, double freqGHz, int tc, float *time, bool tcalibrated, bool rotated)$/;"	f	class:DRSBoard
+GetTime	drv/DRS.cpp	/^int DRSBoard::GetTime(unsigned int chipIndex, int tc, float *time, bool tcalibrated, bool rotated)$/;"	f	class:DRSBoard
+GetTimeCalibration	drv/DRS.cpp	/^DRSBoard::TimeData * DRSBoard::GetTimeCalibration(unsigned int chipIndex, bool reinit)$/;"	f	class:DRSBoard
+GetTimeCalibration	drv/DRS.cpp	/^int DRSBoard::GetTimeCalibration(unsigned int chipIndex, int mode, float *time, bool force)$/;"	f	class:DRSBoard
+GetTransport	drv/DRS.h	/^   int          GetTransport() const { return fTransport; }$/;"	f	class:DRSBoard
+GetTriggerBus	drv/DRS.cpp	/^int DRSBoard::GetTriggerBus()$/;"	f	class:DRSBoard
+GetTriggerCell	drv/DRS.cpp	/^int DRSBoard::GetTriggerCell(unsigned char *waveforms, unsigned int chipIndex)$/;"	f	class:DRSBoard
+GetTriggerCell	drv/DRS.cpp	/^int DRSBoard::GetTriggerCell(unsigned int chipIndex)$/;"	f	class:DRSBoard
+GetTriggerChannel	drv/DRS.h	/^int DRSBoard::GetTriggerChannel() const$/;"	f	class:DRSBoard
+GetTriggerDelay	drv/DRS.h	/^   int          GetTriggerDelay() { return fTriggerDelay; }$/;"	f	class:DRSBoard
+GetTriggerDelayNs	drv/DRS.h	/^   double       GetTriggerDelayNs() { return fTriggerDelayNs; }$/;"	f	class:DRSBoard
+GetTriggerEnable	drv/DRS.h	/^   int          GetTriggerEnable(int i) { return i?fTriggerEnable2:fTriggerEnable1; }$/;"	f	class:DRSBoard
+GetTriggerInput	drv/DRS.h	/^   inline int   GetTriggerInput() const { return fDRSType < 4 ? Channel2Input(GetTriggerChannel()) : -1; }$/;"	f	class:DRSBoard
+GetTriggerSource	drv/DRS.h	/^   int          GetTriggerSource() { return fTriggerSource; }$/;"	f	class:DRSBoard
+GetVMEInterface	drv/DRS.h	/^   MVME_INTERFACE *GetVMEInterface() const { return fVmeInterface; };$/;"	f	class:DRS
+GetVMEInterface	drv/DRS.h	/^   MVME_INTERFACE *GetVMEInterface() const { return fVmeInterface; };$/;"	f	class:DRSBoard
+GetValue	drv/DRS.cpp	/^float ResponseCalibration::GetValue(float *coefficients, float u, int n)$/;"	f	class:ResponseCalibration
+GetWave	drv/DRS.cpp	/^int DRSBoard::GetWave(unsigned char *waveforms, unsigned int chipIndex, unsigned char channel,$/;"	f	class:DRSBoard
+GetWave	drv/DRS.cpp	/^int DRSBoard::GetWave(unsigned int chipIndex, unsigned char channel, float *waveform)$/;"	f	class:DRSBoard
+GetWave	drv/DRS.cpp	/^int DRSBoard::GetWave(unsigned int chipIndex, unsigned char channel, float *waveform, bool responseCalib,$/;"	f	class:DRSBoard
+GetWave	drv/DRS.cpp	/^int DRSBoard::GetWave(unsigned int chipIndex, unsigned char channel, short *waveform, bool responseCalib,$/;"	f	class:DRSBoard
+GetWave	libs/TEvent.cpp	/^void TEvent::GetWave(int chn,float *pwave)$/;"	f	class:TEvent
+GetWaveformBufferSize	drv/DRS.h	/^int DRSBoard::GetWaveformBufferSize() const$/;"	f	class:DRSBoard
+HAVE_USB	drv/DRS.h	14;"	d
+HERE	drv/mxml.c	1259;"	d	file:
+HasCorrectFirmware	drv/DRS.cpp	/^bool DRSBoard::HasCorrectFirmware()$/;"	f	class:DRSBoard
+HasMultiBuffer	drv/DRS.h	/^   int          HasMultiBuffer() const { return fHasMultiBuffer; }$/;"	f	class:DRSBoard
+Housholder	drv/DRS.cpp	/^void ResponseCalibration::Housholder(int lpivot, int l1, int m, float **u, int iU1, int iU2, float *up,$/;"	f	class:ResponseCalibration
+INTERNAL_ENTITY	drv/mxml.h	25;"	d
+ImplFileLine	libs/TEventDict.cpp	/^int TEvent::ImplFileLine()$/;"	f	class:TEvent
+ImplFileName	libs/TEventDict.cpp	/^const char *TEvent::ImplFileName()$/;"	f	class:TEvent
+IncrementMultiBufferRP	drv/DRS.cpp	/^void DRSBoard::IncrementMultiBufferRP()$/;"	f	class:DRSBoard
+Info	test.cpp	/^int Info()$/;"	f
+Init	drv/DRS.cpp	/^int DRSBoard::Init()$/;"	f	class:DRSBoard
+Init	libs/TEventDict.cpp	/^   static ::ROOT::TGenericClassInfo *_R__UNIQUE_(Init) = GenerateInitInstanceLocal((const ::TEvent*)0x0); R__UseDummy(_R__UNIQUE_(Init));$/;"	m	namespace:ROOT	file:
+Init	test.cpp	/^int Init(double freq, double midpoint)$/;"	f
+InitFPGA	drv/DRS.cpp	/^int DRSBoard::InitFPGA(void)$/;"	f	class:DRSBoard
+InitFields	drv/DRS.cpp	/^void ResponseCalibration::InitFields(int numberOfPointsLowVolt, int numberOfPoints, int numberOfMode2Bins,$/;"	f	class:ResponseCalibration
+InitTimeCalibration	drv/DRS.cpp	/^bool DRSBoard::InitTimeCalibration(unsigned int chipIndex)$/;"	f	class:DRSBoard
+Input2Channel	drv/DRS.h	/^int DRSBoard::Input2Channel(int input, int ind) const$/;"	f	class:DRSBoard
+Input2ReadoutChannel	drv/DRS.h	/^int DRSBoard::Input2ReadoutChannel(int input, int ind) const$/;"	f	class:DRSBoard
+InteractSpeed	drv/DRS.cpp	/^void DRSBoard::InteractSpeed()$/;"	f	class:DRSBoard
+IsBusy	drv/DRS.cpp	/^int DRSBoard::IsBusy()$/;"	f	class:DRSBoard
+IsCalibChannel	drv/DRS.h	/^bool DRSBoard::IsCalibChannel(int ch) const$/;"	f	class:DRSBoard
+IsCalibInput	drv/DRS.h	/^bool DRSBoard::IsCalibInput(int input) const$/;"	f	class:DRSBoard
+IsEventAvailable	drv/DRS.cpp	/^int DRSBoard::IsEventAvailable()$/;"	f	class:DRSBoard
+IsLMKLocked	drv/DRS.cpp	/^int DRSBoard::IsLMKLocked()$/;"	f	class:DRSBoard
+IsMultiBuffer	drv/DRS.h	/^   int          IsMultiBuffer() { return fMultiBuffer; }$/;"	f	class:DRSBoard
+IsNewFreq	drv/DRS.cpp	/^int DRSBoard::IsNewFreq(unsigned char chipIndex)$/;"	f	class:DRSBoard
+IsPLLLocked	drv/DRS.cpp	/^int DRSBoard::IsPLLLocked()$/;"	f	class:DRSBoard
+IsRead	drv/DRS.h	/^   bool   IsRead(int chipIndex) const { return fCalibrationValid[chipIndex]; }$/;"	f	class:ResponseCalibration
+IsTimingCalibrationValid	drv/DRS.cpp	/^bool DRSBoard::IsTimingCalibrationValid()$/;"	f	class:DRSBoard
+IsVoltageCalibrationValid	drv/DRS.h	/^   bool         IsVoltageCalibrationValid(void) { return fVoltageCalibrationValid; }$/;"	f	class:DRSBoard
+LIBS	Makefile	/^	LIBS          = -lpthread -lutil -L\/opt\/local\/lib -lusb$/;"	m
+LIBS	Makefile	/^	LIBS          = -lpthread -lutil -lusb$/;"	m
+LeastSquaresAccumulation	drv/DRS.cpp	/^void ResponseCalibration::LeastSquaresAccumulation(float **matrix, int nb, int *ip, int *ir, int mt, int jt)$/;"	f	class:ResponseCalibration
+LeastSquaresSolving	drv/DRS.cpp	/^int ResponseCalibration::LeastSquaresSolving(float **matrix, int nb, int ip, int ir, float *x, int n)$/;"	f	class:ResponseCalibration
+LinearRegression	drv/DRS.cpp	/^void DRSBoard::LinearRegression(double *x, double *y, int n, double *a, double *b)$/;"	f	class:DRSBoard
+MAINOBJ	Makefile	/^MAINOBJ	= $(OBJDIR)\/drscl.o $(OBJDIR)\/test.o$/;"	m
+MAX_N_BYTES	drv/DRS.cpp	2766;"	d	file:
+MUSBSTD_H	drv/musbstd.h	13;"	d
+MUSB_ACCESS_ERROR	drv/musbstd.h	56;"	d
+MUSB_INTERFACE	drv/musbstd.h	/^} MUSB_INTERFACE;$/;"	t	typeref:struct:__anon4
+MUSB_INTERFACE	drv/musbstd.h	/^} MUSB_INTERFACE;$/;"	t	typeref:struct:__anon5
+MUSB_INTERFACE	drv/musbstd.h	/^} MUSB_INTERFACE;$/;"	t	typeref:struct:__anon6
+MUSB_INVALID_PARAM	drv/musbstd.h	54;"	d
+MUSB_NOT_FOUND	drv/musbstd.h	53;"	d
+MUSB_NO_MEM	drv/musbstd.h	55;"	d
+MUSB_SUCCESS	drv/musbstd.h	52;"	d
+MXML_GNUC_FORMAT	drv/mxml.c	88;"	d	file:
+MXML_GNUC_FORMAT	drv/mxml.c	93;"	d	file:
+MXML_GNUC_PRINTF	drv/mxml.c	84;"	d	file:
+MXML_GNUC_PRINTF	drv/mxml.c	91;"	d	file:
+MXML_GNUC_SCANF	drv/mxml.c	86;"	d	file:
+MXML_GNUC_SCANF	drv/mxml.c	92;"	d	file:
+MXML_MAX_CONDITION	drv/mxml.h	29;"	d
+MXML_MAX_ENTITY	drv/mxml.h	27;"	d
+MXML_NAME_LENGTH	drv/mxml.h	17;"	d
+MXML_NODE	drv/mxml.h	/^} MXML_NODE;$/;"	t	typeref:struct:mxml_struct
+MXML_WRITER	drv/mxml.h	/^} MXML_WRITER;$/;"	t	typeref:struct:__anon1
+MakeDir	drv/DRS.cpp	/^int ResponseCalibration::MakeDir(const char *path)$/;"	f	class:ResponseCalibration
+Measure	test.cpp	/^int Measure()$/;"	f
+MeasureSpeed	drv/DRS.cpp	/^void DRSBoard::MeasureSpeed()$/;"	f	class:DRSBoard
+MonitorFrequency	drv/DRS.cpp	/^void DRSBoard::MonitorFrequency()$/;"	f	class:DRSBoard
+NULL	drv/DRS.h	32;"	d
+N_REG	drv/DRS.cpp	2722;"	d	file:
+OBJDIR	Makefile	/^OBJDIR = $(shell pwd)\/obj$/;"	m
+OBJECTS	Makefile	/^OBJECTS = $(OBJDIR)\/musbstd.o $(OBJDIR)\/mxml.o $(OBJDIR)\/strlcpy.o$/;"	m
+OSTYPE	Makefile	/^OSTYPE = $(shell uname)$/;"	m
+O_BINARY	drscl.cpp	25;"	d	file:
+O_BINARY	drv/mxml.c	63;"	d	file:
+O_BINARY	test.cpp	13;"	d	file:
+O_TEXT	drv/mxml.c	62;"	d	file:
+OffsetCalibration	drv/DRS.cpp	/^bool ResponseCalibration::OffsetCalibration(int chipNumber)$/;"	f	class:ResponseCalibration
+OffsetCalibrationV3	drv/DRS.cpp	/^bool ResponseCalibration::OffsetCalibrationV3(int chipNumber)$/;"	f	class:ResponseCalibration
+OffsetCalibrationV4	drv/DRS.cpp	/^bool ResponseCalibration::OffsetCalibrationV4(int chipNumber)$/;"	f	class:ResponseCalibration
+PMC1_OFFSET	drv/DRS.cpp	104;"	d	file:
+PMC2_OFFSET	drv/DRS.cpp	105;"	d	file:
+PMC_CTRL_OFFSET	drv/DRS.cpp	106;"	d	file:
+PMC_FIFO_OFFSET	drv/DRS.cpp	108;"	d	file:
+PMC_RAM_OFFSET	drv/DRS.cpp	109;"	d	file:
+PMC_STATUS_OFFSET	drv/DRS.cpp	107;"	d	file:
+PMXML_NODE	drv/mxml.h	/^typedef struct mxml_struct *PMXML_NODE;$/;"	t	typeref:struct:mxml_struct
+PROCESSING_INSTRUCTION_NODE	drv/mxml.h	21;"	d
+PreCalculateBSpline	drv/DRS.cpp	/^void ResponseCalibration::CalibrationData::PreCalculateBSpline()$/;"	f	class:ResponseCalibration::CalibrationData
+Progress	drscl.cpp	/^void ProgressBar::Progress(int prog)$/;"	f	class:ProgressBar
+ProgressBar	drscl.cpp	/^class ProgressBar : public DRSCallback$/;"	c	file:
+RAMTest	drv/DRS.cpp	/^int DRSBoard::RAMTest(int flag)$/;"	f	class:DRSBoard
+REG_ADCCLK_PHASE	drv/DRS.h	63;"	d
+REG_BOARD_TYPE	drv/DRS.h	80;"	d
+REG_CALIB_TIMING	drv/DRS.h	70;"	d
+REG_CHANNEL_CONFIG	drv/DRS.h	60;"	d
+REG_CHANNEL_MODE	drv/DRS.h	62;"	d
+REG_CONFIG	drv/DRS.h	61;"	d
+REG_COOLDOWN	drv/DRS.h	76;"	d
+REG_CTRL	drv/DRS.h	50;"	d
+REG_DAC0	drv/DRS.h	52;"	d
+REG_DAC1	drv/DRS.h	53;"	d
+REG_DAC2	drv/DRS.h	54;"	d
+REG_DAC3	drv/DRS.h	55;"	d
+REG_DAC4	drv/DRS.h	56;"	d
+REG_DAC5	drv/DRS.h	57;"	d
+REG_DAC6	drv/DRS.h	58;"	d
+REG_DAC7	drv/DRS.h	59;"	d
+REG_DAC_OFS	drv/DRS.h	51;"	d
+REG_EEPROM_PAGE_EVAL	drv/DRS.h	71;"	d
+REG_EEPROM_PAGE_MEZZ	drv/DRS.h	72;"	d
+REG_EVENTS_IN_FIFO	drv/DRS.h	99;"	d
+REG_EVENT_COUNT	drv/DRS.h	100;"	d
+REG_FREQ1	drv/DRS.h	101;"	d
+REG_FREQ2	drv/DRS.h	102;"	d
+REG_FREQ_SET	drv/DRS.h	67;"	d
+REG_FREQ_SET_HI	drv/DRS.h	64;"	d
+REG_FREQ_SET_LO	drv/DRS.h	65;"	d
+REG_LMK_LSB	drv/DRS.h	74;"	d
+REG_LMK_MSB	drv/DRS.h	69;"	d
+REG_MAGIC	drv/DRS.h	79;"	d
+REG_RDAC0	drv/DRS.h	83;"	d
+REG_RDAC1	drv/DRS.h	85;"	d
+REG_RDAC2	drv/DRS.h	87;"	d
+REG_RDAC3	drv/DRS.h	89;"	d
+REG_RDAC4	drv/DRS.h	91;"	d
+REG_RDAC5	drv/DRS.h	92;"	d
+REG_RDAC6	drv/DRS.h	97;"	d
+REG_RDAC7	drv/DRS.h	98;"	d
+REG_RDAC_OFS	drv/DRS.h	82;"	d
+REG_READ_POINTER	drv/DRS.h	77;"	d
+REG_SERIAL_BOARD	drv/DRS.h	106;"	d
+REG_STATUS	drv/DRS.h	81;"	d
+REG_STOP_CELL0	drv/DRS.h	84;"	d
+REG_STOP_CELL1	drv/DRS.h	86;"	d
+REG_STOP_CELL2	drv/DRS.h	88;"	d
+REG_STOP_CELL3	drv/DRS.h	90;"	d
+REG_STOP_WSR0	drv/DRS.h	93;"	d
+REG_STOP_WSR1	drv/DRS.h	94;"	d
+REG_STOP_WSR2	drv/DRS.h	95;"	d
+REG_STOP_WSR3	drv/DRS.h	96;"	d
+REG_TEMPERATURE	drv/DRS.h	104;"	d
+REG_TRG_CONFIG	drv/DRS.h	73;"	d
+REG_TRG_DELAY	drv/DRS.h	66;"	d
+REG_TRIGGER_BUS	drv/DRS.h	105;"	d
+REG_TRIG_DELAY	drv/DRS.h	68;"	d
+REG_VERSION_FW	drv/DRS.h	107;"	d
+REG_WARMUP	drv/DRS.h	75;"	d
+REG_WRITE_POINTER	drv/DRS.h	103;"	d
+REQUIRED_FIRMWARE_VERSION_DRS2	drv/DRS.cpp	/^const int REQUIRED_FIRMWARE_VERSION_DRS2 = 5268;$/;"	v
+REQUIRED_FIRMWARE_VERSION_DRS3	drv/DRS.cpp	/^const int REQUIRED_FIRMWARE_VERSION_DRS3 = 6981;$/;"	v
+REQUIRED_FIRMWARE_VERSION_DRS4	drv/DRS.cpp	/^const int REQUIRED_FIRMWARE_VERSION_DRS4 = 15147;$/;"	v
+ROOT	libs/TEventDict.cpp	/^namespace ROOT {$/;"	n	file:
+ROOTOBJ	Makefile	/^ROOTOBJ = $(OBJDIR)\/TEvent.o $(OBJDIR)\/TEventDict.o$/;"	m
+ROOTSHAREDOBJ	Makefile	/^ROOTSHAREDOBJ = $(OBJDIR)\/TEvent.so$/;"	m
+R__DICTIONARY_FILENAME	libs/TEventDict.cpp	7;"	d	file:
+Read	drv/DRS.cpp	/^int DRSBoard::Read(int type, void *data, unsigned int addr, int size)$/;"	f	class:DRSBoard
+ReadCalibration	drv/DRS.cpp	/^bool ResponseCalibration::ReadCalibration(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+ReadCalibration	drv/DRS.cpp	/^void DRSBoard::ReadCalibration(void)$/;"	f	class:DRSBoard
+ReadCalibrationV3	drv/DRS.cpp	/^bool ResponseCalibration::ReadCalibrationV3(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+ReadCalibrationV4	drv/DRS.cpp	/^bool ResponseCalibration::ReadCalibrationV4(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+ReadDAC	drv/DRS.cpp	/^int DRSBoard::ReadDAC(unsigned char channel, double *value)$/;"	f	class:DRSBoard
+ReadEEPROM	drv/DRS.cpp	/^int DRSBoard::ReadEEPROM(unsigned short page, void *buffer, int size)$/;"	f	class:DRSBoard
+ReadFrequency	drv/DRS.cpp	/^int DRSBoard::ReadFrequency(unsigned char chipIndex, double *f)$/;"	f	class:DRSBoard
+ReadSerialNumber	drv/DRS.cpp	/^void DRSBoard::ReadSerialNumber()$/;"	f	class:DRSBoard
+ReadSingleWaveform	drv/DRS.cpp	/^void DRSBoard::ReadSingleWaveform(int nChip, int nChan, $/;"	f	class:DRSBoard
+ReadoutChannel2Channel	drv/DRS.h	/^int DRSBoard::ReadoutChannel2Channel(int readout) const$/;"	f	class:DRSBoard
+ReadoutChannel2Input	drv/DRS.h	/^int DRSBoard::ReadoutChannel2Input(int readout) const$/;"	f	class:DRSBoard
+RecordCalibrationPoints	drv/DRS.cpp	/^bool ResponseCalibration::RecordCalibrationPoints(int chipNumber)$/;"	f	class:ResponseCalibration
+RecordCalibrationPointsV3	drv/DRS.cpp	/^bool ResponseCalibration::RecordCalibrationPointsV3(int chipNumber)$/;"	f	class:ResponseCalibration
+RecordCalibrationPointsV4	drv/DRS.cpp	/^bool ResponseCalibration::RecordCalibrationPointsV4(int chipNumber)$/;"	f	class:ResponseCalibration
+RegisterTest	drv/DRS.cpp	/^void DRSBoard::RegisterTest()$/;"	f	class:DRSBoard
+RegulateFrequency	drv/DRS.cpp	/^int DRSBoard::RegulateFrequency(double demand)$/;"	f	class:DRSBoard
+Reinit	drv/DRS.cpp	/^int DRSBoard::Reinit()$/;"	f	class:DRSBoard
+RemoveSymmetricSpikes	drv/DRS.cpp	/^void DRSBoard::RemoveSymmetricSpikes(short **wf, int nwf,$/;"	f	class:DRSBoard
+ResetCalibration	drv/DRS.cpp	/^void ResponseCalibration::ResetCalibration()$/;"	f	class:ResponseCalibration
+ResetMultiBuffer	drv/DRS.cpp	/^void DRSBoard::ResetMultiBuffer(void)$/;"	f	class:DRSBoard
+ResponseCalibration	drv/DRS.cpp	/^ResponseCalibration::ResponseCalibration(DRSBoard * board)$/;"	f	class:ResponseCalibration
+ResponseCalibration	drv/DRS.h	/^class ResponseCalibration {$/;"	c
+RobustAverageWaveforms	drv/DRS.cpp	/^int DRSBoard::RobustAverageWaveforms(DRSCallback *pcb, int nChip, int nChan, $/;"	f	class:DRSBoard
+SelectClockSource	drv/DRS.cpp	/^int DRSBoard::SelectClockSource(int source)$/;"	f	class:DRSBoard
+SetADCClkPhase	drv/DRS.cpp	/^void DRSBoard::SetADCClkPhase(int phase, bool invert)$/;"	f	class:DRSBoard
+SetBoardSerialNumber	drv/DRS.cpp	/^int DRSBoard::SetBoardSerialNumber(unsigned short serialNumber)$/;"	f	class:DRSBoard
+SetCalibTiming	drv/DRS.cpp	/^int DRSBoard::SetCalibTiming(int t_enable, int t_cal)$/;"	f	class:DRSBoard
+SetCalibVoltage	drv/DRS.cpp	/^int DRSBoard::SetCalibVoltage(double value)$/;"	f	class:DRSBoard
+SetCalibrationDirectory	drv/DRS.cpp	/^void DRSBoard::SetCalibrationDirectory(const char *calibrationDirectoryPath)$/;"	f	class:DRSBoard
+SetCalibrationParameters	drv/DRS.cpp	/^void ResponseCalibration::SetCalibrationParameters(int numberOfPointsLowVolt, int numberOfPoints,$/;"	f	class:ResponseCalibration
+SetChannelConfig	drv/DRS.cpp	/^int DRSBoard::SetChannelConfig(int firstChannel, int lastChannel, int nConfigChannels)$/;"	f	class:DRSBoard
+SetCooldown	drv/DRS.cpp	/^void DRSBoard::SetCooldown(unsigned int microseconds)$/;"	f	class:DRSBoard
+SetDAC	drv/DRS.cpp	/^int DRSBoard::SetDAC(unsigned char channel, double value)$/;"	f	class:DRSBoard
+SetDebug	drv/DRS.h	/^   void         SetDebug(int debug) { fDebug = debug; }$/;"	f	class:DRSBoard
+SetDecimation	drv/DRS.cpp	/^int DRSBoard::SetDecimation(int flag)$/;"	f	class:DRSBoard
+SetDelayedStart	drv/DRS.cpp	/^int DRSBoard::SetDelayedStart(int flag)$/;"	f	class:DRSBoard
+SetDelayedTrigger	drv/DRS.cpp	/^int DRSBoard::SetDelayedTrigger(int flag)$/;"	f	class:DRSBoard
+SetDominoActive	drv/DRS.cpp	/^int DRSBoard::SetDominoActive(unsigned char mode)$/;"	f	class:DRSBoard
+SetDominoMode	drv/DRS.cpp	/^int DRSBoard::SetDominoMode(unsigned char mode)$/;"	f	class:DRSBoard
+SetExternalClockFrequency	drv/DRS.cpp	/^int DRSBoard::SetExternalClockFrequency(double frequencyMHz)$/;"	f	class:DRSBoard
+SetFrequency	drv/DRS.cpp	/^int DRSBoard::SetFrequency(double demand, bool wait)$/;"	f	class:DRSBoard
+SetId	libs/TEvent.h	/^		inline void SetId(int i){fId = i;}$/;"	f	class:TEvent
+SetInputRange	drv/DRS.cpp	/^int DRSBoard::SetInputRange(double center)$/;"	f	class:DRSBoard
+SetLED	drv/DRS.cpp	/^void DRSBoard::SetLED(int state)$/;"	f	class:DRSBoard
+SetMultiBuffer	drv/DRS.cpp	/^int DRSBoard::SetMultiBuffer(int flag)$/;"	f	class:DRSBoard
+SetMultiBufferRP	drv/DRS.cpp	/^int DRSBoard::SetMultiBufferRP(unsigned short rp)$/;"	f	class:DRSBoard
+SetNumberOfChannels	drv/DRS.cpp	/^void DRSBoard::SetNumberOfChannels(int nChannels)$/;"	f	class:DRSBoard
+SetReadoutMode	drv/DRS.cpp	/^int DRSBoard::SetReadoutMode(unsigned char mode)$/;"	f	class:DRSBoard
+SetRefclk	drv/DRS.cpp	/^int DRSBoard::SetRefclk(int source)$/;"	f	class:DRSBoard
+SetStandbyMode	drv/DRS.cpp	/^int DRSBoard::SetStandbyMode(int flag)$/;"	f	class:DRSBoard
+SetSyncDelay	drv/DRS.cpp	/^int DRSBoard::SetSyncDelay(int ticks)$/;"	f	class:DRSBoard
+SetTranspMode	drv/DRS.cpp	/^int DRSBoard::SetTranspMode(int flag)$/;"	f	class:DRSBoard
+SetTrigger	test.cpp	/^void SetTrigger(int ch,double level, double delay,bool edge)$/;"	f
+SetTriggerDelayNs	drv/DRS.cpp	/^int DRSBoard::SetTriggerDelayNs(int delay)$/;"	f	class:DRSBoard
+SetTriggerDelayPercent	drv/DRS.cpp	/^int DRSBoard::SetTriggerDelayPercent(int delay)$/;"	f	class:DRSBoard
+SetTriggerLevel	drv/DRS.cpp	/^int DRSBoard::SetTriggerLevel(double voltage, bool negative)$/;"	f	class:DRSBoard
+SetTriggerSource	drv/DRS.cpp	/^int DRSBoard::SetTriggerSource(int source)$/;"	f	class:DRSBoard
+SetVoltageOffset	drv/DRS.cpp	/^void DRSBoard::SetVoltageOffset(double offset1, double offset2)$/;"	f	class:DRSBoard
+SetWarmup	drv/DRS.cpp	/^void DRSBoard::SetWarmup(unsigned int microseconds)$/;"	f	class:DRSBoard
+Shadow	libs/TEventDict.cpp	/^   namespace Shadow {$/;"	n	namespace:ROOT	file:
+ShowEvent	test.cpp	/^void ShowEvent()$/;"	f
+ShowHelp	test.cpp	/^int ShowHelp()$/;"	f
+ShowId	libs/TEvent.h	/^		inline void ShowId() {printf("Event: %d\\n",fId);}$/;"	f	class:TEvent
+ShowMembers	libs/TEventDict.cpp	/^void TEvent::ShowMembers(TMemberInspector &R__insp)$/;"	f	class:TEvent
+ShowWave	libs/TEvent.cpp	/^void TEvent::ShowWave(int ch)$/;"	f	class:TEvent
+Sleep	drscl.cpp	54;"	d	file:
+Sleep	drv/DRS.cpp	/^inline void Sleep(useconds_t x)$/;"	f
+SoftTrigger	drv/DRS.cpp	/^int DRSBoard::SoftTrigger(void)$/;"	f	class:DRSBoard
+StartClearCycle	drv/DRS.cpp	/^int DRSBoard::StartClearCycle()$/;"	f	class:DRSBoard
+StartDomino	drv/DRS.cpp	/^int DRSBoard::StartDomino()$/;"	f	class:DRSBoard
+Streamer	libs/TEventDict.cpp	/^void TEvent::Streamer(TBuffer &R__b)$/;"	f	class:TEvent
+SubtractADCOffset	drv/DRS.cpp	/^bool ResponseCalibration::SubtractADCOffset(unsigned int chipIndex, unsigned int channel,$/;"	f	class:ResponseCalibration
+TCALIB_METHOD	drv/DRS.cpp	73;"	d	file:
+TEXT_NODE	drv/mxml.h	20;"	d
+TEvent	libs/TEvent.cpp	/^ClassImp(TEvent);$/;"	v
+TEvent	libs/TEvent.cpp	/^TEvent::TEvent()$/;"	f	class:TEvent
+TEvent	libs/TEvent.h	/^		TEvent(int id) {fId = id;}$/;"	f	class:TEvent
+TEvent	libs/TEvent.h	/^class TEvent : public TObject {$/;"	c
+TEvent_h	libs/TEvent.h	2;"	d
+TRUE	drv/mxml.c	58;"	d	file:
+TR_USB	drv/DRS.h	37;"	d
+TR_USB2	drv/DRS.h	38;"	d
+TR_VME	drv/DRS.h	36;"	d
+T_CTRL	drv/DRS.h	42;"	d
+T_FIFO	drv/DRS.h	45;"	d
+T_RAM	drv/DRS.h	44;"	d
+T_STATUS	drv/DRS.h	43;"	d
+TestDAC	drv/DRS.cpp	/^void DRSBoard::TestDAC(int channel)$/;"	f	class:DRSBoard
+TestShift	drv/DRS.cpp	/^int DRSBoard::TestShift(int n)$/;"	f	class:DRSBoard
+TimeData	drv/DRS.h	/^      TimeData()$/;"	f	class:DRSBoard::TimeData
+TimeData	drv/DRS.h	/^   class TimeData {$/;"	c	class:DRSBoard
+TransferWaves	drv/DRS.cpp	/^int DRSBoard::TransferWaves(int firstChannel, int lastChannel)$/;"	f	class:DRSBoard
+TransferWaves	drv/DRS.cpp	/^int DRSBoard::TransferWaves(int numberOfChannels)$/;"	f	class:DRSBoard
+TransferWaves	drv/DRS.cpp	/^int DRSBoard::TransferWaves(unsigned char *p, int firstChannel, int lastChannel)$/;"	f	class:DRSBoard
+TransferWaves	drv/DRS.cpp	/^int DRSBoard::TransferWaves(unsigned char *p, int numberOfChannels)$/;"	f	class:DRSBoard
+USB2_BUFFER_SIZE	drv/DRS.cpp	137;"	d	file:
+USB2_CMD_READ	drv/DRS.cpp	124;"	d	file:
+USB2_CMD_WRITE	drv/DRS.cpp	125;"	d	file:
+USB2_CTRL_OFFSET	drv/DRS.cpp	126;"	d	file:
+USB2_FIFO_OFFSET	drv/DRS.cpp	128;"	d	file:
+USB2_RAM_OFFSET	drv/DRS.cpp	129;"	d	file:
+USB2_STATUS_OFFSET	drv/DRS.cpp	127;"	d	file:
+USB_CMD_ADDR	drv/DRS.cpp	118;"	d	file:
+USB_CMD_IDENT	drv/DRS.cpp	117;"	d	file:
+USB_CMD_READ	drv/DRS.cpp	119;"	d	file:
+USB_CMD_READ12	drv/DRS.cpp	121;"	d	file:
+USB_CMD_WRITE	drv/DRS.cpp	120;"	d	file:
+USB_CMD_WRITE12	drv/DRS.cpp	122;"	d	file:
+USB_CTRL_OFFSET	drv/DRS.cpp	114;"	d	file:
+USB_RAM_OFFSET	drv/DRS.cpp	116;"	d	file:
+USB_STATUS_OFFSET	drv/DRS.cpp	115;"	d	file:
+USB_TIMEOUT	drv/DRS.cpp	112;"	d	file:
+USE_DRS_MUTEX	drv/DRS.cpp	143;"	d	file:
+VCALIB_METHOD	drv/DRS.cpp	72;"	d	file:
+VoltToFreq	drv/DRS.cpp	/^double DRSBoard::VoltToFreq(double volt)$/;"	f	class:DRSBoard
+WFH_SIZE	drv/DRS.cpp	4567;"	d	file:
+Write	drv/DRS.cpp	/^int DRSBoard::Write(int type, unsigned int addr, void *data, int size)$/;"	f	class:DRSBoard
+WriteCalibration	drv/DRS.cpp	/^bool ResponseCalibration::WriteCalibration(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+WriteCalibrationV3	drv/DRS.cpp	/^bool ResponseCalibration::WriteCalibrationV3(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+WriteCalibrationV4	drv/DRS.cpp	/^bool ResponseCalibration::WriteCalibrationV4(unsigned int chipIndex)$/;"	f	class:ResponseCalibration
+WriteEEPROM	drv/DRS.cpp	/^int DRSBoard::WriteEEPROM(unsigned short page, void *buffer, int size)$/;"	f	class:DRSBoard
+WriteTime	libs/TEvent.cpp	/^void TEvent::WriteTime(float *ptime)$/;"	f	class:TEvent
+WriteWave	libs/TEvent.cpp	/^void TEvent::WriteWave(int chn,float *pwave)$/;"	f	class:TEvent
+XML_INDENT	drv/mxml.c	81;"	d	file:
+_MXML_H_	drv/mxml.h	15;"	d
+_STRLCPY_H_	drv/strlcpy.h	13;"	d
+_data_enc	drv/mxml.c	/^static char *_data_enc = NULL;$/;"	v	file:
+_encode_buffer	drv/mxml.c	/^static char *_encode_buffer = NULL;$/;"	v	file:
+attribute_name	drv/mxml.h	/^   char       *attribute_name;$/;"	m	struct:mxml_struct
+attribute_value	drv/mxml.h	/^   char       **attribute_value;$/;"	m	struct:mxml_struct
+b	test.cpp	/^DRSBoard *b;$/;"	v
+buffer	drv/mxml.h	/^   char *buffer;$/;"	m	struct:__anon1
+buffer_len	drv/mxml.h	/^   int  buffer_len;$/;"	m	struct:__anon1
+buffer_size	drv/mxml.h	/^   int  buffer_size;$/;"	m	struct:__anon1
+center	drv/DRS.cpp	/^static float          center[kNumberOfChipsMax][kNumberOfChannelsMax][kNumberOfBins];$/;"	v	file:
+child	drv/mxml.h	/^   PMXML_NODE child;$/;"	m	struct:mxml_struct
+clear_screen	drscl.cpp	/^void clear_screen()$/;"	f
+cmd_loop	drscl.cpp	/^void cmd_loop()$/;"	f
+darwin_configure_device	drv/musbstd.c	/^IOReturn darwin_configure_device(MUSB_INTERFACE* musb)$/;"	f
+data_was_written	drv/mxml.h	/^   int  data_was_written;$/;"	m	struct:__anon1
+deleteArray_TEvent	libs/TEventDict.cpp	/^   static void deleteArray_TEvent(void *p) {$/;"	f	namespace:ROOT
+delete_TEvent	libs/TEventDict.cpp	/^   static void delete_TEvent(void *p) {$/;"	f	namespace:ROOT
+destruct_TEvent	libs/TEventDict.cpp	/^   static void destruct_TEvent(void *p) {$/;"	f	namespace:ROOT
+dev	drv/musbstd.h	/^   usb_dev_handle *dev;$/;"	m	struct:__anon4
+device	drv/musbstd.h	/^   void *device;$/;"	m	struct:__anon6
+drs	test.cpp	/^DRS *drs;$/;"	v
+drs_kbhit	drv/DRS.cpp	/^int drs_kbhit()$/;"	f
+drs_kbhit	drv/DRS.cpp	37;"	d	file:
+drscl_svn_revision	drscl.cpp	/^char *drscl_svn_revision = "$Id: drscl.cpp 18183 2011-07-26 09:27:17Z ritt $";$/;"	v
+element_is_open	drv/mxml.h	/^   int  element_is_open;$/;"	m	struct:__anon1
+evt	test.cpp	/^TEvent *evt;$/;"	v
+f	test.cpp	/^FILE  *f;$/;"	v
+fADCActive	drv/DRS.h	/^   int                  fADCActive;$/;"	m	class:DRSBoard
+fADCClkInvert	drv/DRS.h	/^   bool                 fADCClkInvert;$/;"	m	class:DRSBoard
+fADCClkPhase	drv/DRS.h	/^   int                  fADCClkPhase;$/;"	m	class:DRSBoard
+fAcalMode	drv/DRS.h	/^   int                  fAcalMode;$/;"	m	class:DRSBoard
+fAcalVolt	drv/DRS.h	/^   double               fAcalVolt;$/;"	m	class:DRSBoard
+fBSplineLookUp	drv/DRS.h	/^      float                 **fBSplineLookUp[kNumberOfADCBins];       \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fBSplineOffsetLookUp	drv/DRS.h	/^      int                    *fBSplineOffsetLookUp[kNumberOfADCBins]; \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fBaseAddress	drv/DRS.h	/^   mvme_addr_t          fBaseAddress;$/;"	m	class:DRSBoard
+fBin	drv/DRS.h	/^         double fBin[kNumberOfBins];$/;"	m	class:DRSBoard::TimeData::FrequencyData
+fBoard	drv/DRS.h	/^   DRSBoard        *fBoard;$/;"	m	class:ResponseCalibration
+fBoard	drv/DRS.h	/^   DRSBoard       *fBoard[kMaxNumberOfBoards];$/;"	m	class:DRS
+fBoardSerialNumber	drv/DRS.h	/^   int                  fBoardSerialNumber;$/;"	m	class:DRSBoard
+fBoardType	drv/DRS.h	/^   int                  fBoardType;$/;"	m	class:DRSBoard
+fCalibDirectory	drv/DRS.h	/^   char                 fCalibDirectory[1000];$/;"	m	class:DRSBoard
+fCalibFile	drv/DRS.h	/^   FILE            *fCalibFile;$/;"	m	class:ResponseCalibration
+fCalibrationData	drv/DRS.h	/^   CalibrationData *fCalibrationData[kNumberOfChipsMax];$/;"	m	class:ResponseCalibration
+fCalibrationValid	drv/DRS.h	/^   bool             fCalibrationValid[2];$/;"	m	class:ResponseCalibration
+fCellCalibratedRange	drv/DRS.h	/^   double               fCellCalibratedRange;$/;"	m	class:DRSBoard
+fCellDT	drv/DRS.h	/^   signed short         fCellDT[kNumberOfChipsMax * kNumberOfChannelsMax][kNumberOfBins];$/;"	m	class:DRSBoard
+fCellGain	drv/DRS.h	/^   double               fCellGain[kNumberOfChipsMax * kNumberOfChannelsMax][kNumberOfBins];$/;"	m	class:DRSBoard
+fCellOffset	drv/DRS.h	/^   unsigned short       fCellOffset[kNumberOfChipsMax * kNumberOfChannelsMax][kNumberOfBins];$/;"	m	class:DRSBoard
+fCellOffset2	drv/DRS.h	/^   unsigned short       fCellOffset2[kNumberOfChipsMax * kNumberOfChannelsMax][kNumberOfBins];$/;"	m	class:DRSBoard
+fCellT	drv/DRS.h	/^   double               fCellT[kNumberOfChipsMax][kNumberOfBins];$/;"	m	class:DRSBoard
+fChannel	drv/DRS.h	/^      CalibrationDataChannel *fChannel[10];                           \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fChannelCascading	drv/DRS.h	/^   int                  fChannelCascading;$/;"	m	class:DRSBoard
+fChannelConfig	drv/DRS.h	/^   int                  fChannelConfig;$/;"	m	class:DRSBoard
+fChannelDepth	drv/DRS.h	/^   int                  fChannelDepth;$/;"	m	class:DRSBoard
+fChip	drv/DRS.h	/^      int            fChip;$/;"	m	class:DRSBoard::TimeData
+fCommonMode	drv/DRS.h	/^   double               fCommonMode;$/;"	m	class:DRSBoard
+fCtrlBits	drv/DRS.h	/^   unsigned int         fCtrlBits;$/;"	m	class:DRSBoard
+fCurrentFitBin	drv/DRS.h	/^   int              fCurrentFitBin;$/;"	m	class:ResponseCalibration
+fCurrentFitChannel	drv/DRS.h	/^   int              fCurrentFitChannel;$/;"	m	class:ResponseCalibration
+fCurrentLowVoltPoint	drv/DRS.h	/^   int              fCurrentLowVoltPoint;$/;"	m	class:ResponseCalibration
+fCurrentPoint	drv/DRS.h	/^   int              fCurrentPoint;$/;"	m	class:ResponseCalibration
+fCurrentSample	drv/DRS.h	/^   int              fCurrentSample;$/;"	m	class:ResponseCalibration
+fDAC_ACALIB	drv/DRS.h	/^   unsigned int         fDAC_ACALIB;$/;"	m	class:DRSBoard
+fDAC_ADCOFS	drv/DRS.h	/^   unsigned int         fDAC_ADCOFS;$/;"	m	class:DRSBoard
+fDAC_BIAS	drv/DRS.h	/^   unsigned int         fDAC_BIAS;$/;"	m	class:DRSBoard
+fDAC_CALN	drv/DRS.h	/^   unsigned int         fDAC_CALN;$/;"	m	class:DRSBoard
+fDAC_CALP	drv/DRS.h	/^   unsigned int         fDAC_CALP;$/;"	m	class:DRSBoard
+fDAC_CLKOFS	drv/DRS.h	/^   unsigned int         fDAC_CLKOFS;$/;"	m	class:DRSBoard
+fDAC_CMOFS	drv/DRS.h	/^   unsigned int         fDAC_CMOFS;$/;"	m	class:DRSBoard
+fDAC_CMOFSN	drv/DRS.h	/^   unsigned int         fDAC_CMOFSN;$/;"	m	class:DRSBoard
+fDAC_CMOFSP	drv/DRS.h	/^   unsigned int         fDAC_CMOFSP;$/;"	m	class:DRSBoard
+fDAC_COFS	drv/DRS.h	/^   unsigned int         fDAC_COFS;$/;"	m	class:DRSBoard
+fDAC_COFSA	drv/DRS.h	/^   unsigned int         fDAC_COFSA;$/;"	m	class:DRSBoard
+fDAC_COFSB	drv/DRS.h	/^   unsigned int         fDAC_COFSB;$/;"	m	class:DRSBoard
+fDAC_DRA	drv/DRS.h	/^   unsigned int         fDAC_DRA;$/;"	m	class:DRSBoard
+fDAC_DRB	drv/DRS.h	/^   unsigned int         fDAC_DRB;$/;"	m	class:DRSBoard
+fDAC_DSA	drv/DRS.h	/^   unsigned int         fDAC_DSA;$/;"	m	class:DRSBoard
+fDAC_DSB	drv/DRS.h	/^   unsigned int         fDAC_DSB;$/;"	m	class:DRSBoard
+fDAC_INOFS	drv/DRS.h	/^   unsigned int         fDAC_INOFS;$/;"	m	class:DRSBoard
+fDAC_ONOFS	drv/DRS.h	/^   unsigned int         fDAC_ONOFS;$/;"	m	class:DRSBoard
+fDAC_ROFS_1	drv/DRS.h	/^   unsigned int         fDAC_ROFS_1;$/;"	m	class:DRSBoard
+fDAC_ROFS_2	drv/DRS.h	/^   unsigned int         fDAC_ROFS_2;$/;"	m	class:DRSBoard
+fDAC_TLEVEL	drv/DRS.h	/^   unsigned int         fDAC_TLEVEL;$/;"	m	class:DRSBoard
+fDAC_TLEVEL1	drv/DRS.h	/^   unsigned int         fDAC_TLEVEL1;$/;"	m	class:DRSBoard
+fDAC_TLEVEL2	drv/DRS.h	/^   unsigned int         fDAC_TLEVEL2;$/;"	m	class:DRSBoard
+fDAC_TLEVEL3	drv/DRS.h	/^   unsigned int         fDAC_TLEVEL3;$/;"	m	class:DRSBoard
+fDAC_TLEVEL4	drv/DRS.h	/^   unsigned int         fDAC_TLEVEL4;$/;"	m	class:DRSBoard
+fDRSType	drv/DRS.h	/^   int                  fDRSType;$/;"	m	class:DRSBoard
+fData	drv/DRS.h	/^         short          *fData[kNumberOfBins];                 \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fDebug	drv/DRS.h	/^   int fDebug;$/;"	m	class:DRSBoard
+fDecimation	drv/DRS.h	/^   int                  fDecimation;$/;"	m	class:DRSBoard
+fDelayedStart	drv/DRS.h	/^   int                  fDelayedStart;$/;"	m	class:DRSBoard
+fDominoActive	drv/DRS.h	/^   int                  fDominoActive;$/;"	m	class:DRSBoard
+fDominoMode	drv/DRS.h	/^   int                  fDominoMode;$/;"	m	class:DRSBoard
+fEndTemperature	drv/DRS.h	/^      float                   fEndTemperature;                        \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fError	drv/DRS.h	/^   char            fError[256];$/;"	m	class:DRS
+fExternalClockFrequency	drv/DRS.h	/^   double               fExternalClockFrequency;$/;"	m	class:DRSBoard
+fFirmwareVersion	drv/DRS.h	/^   int                  fFirmwareVersion;$/;"	m	class:DRSBoard
+fFitted	drv/DRS.h	/^   bool             fFitted;$/;"	m	class:ResponseCalibration
+fFrequency	drv/DRS.h	/^         int    fFrequency;$/;"	m	class:DRSBoard::TimeData::FrequencyData
+fFrequency	drv/DRS.h	/^      FrequencyData *fFrequency[kMaxNumberOfFrequencies];$/;"	m	class:DRSBoard::TimeData
+fFrequency	drv/DRS.h	/^   double               fFrequency;$/;"	m	class:DRSBoard
+fGain	drv/DRS.h	/^         short           fGain[kNumberOfBins];                 \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fGainMax	drv/DRS.h	/^   double          fGainMax;$/;"	m	class:ResponseCalibration
+fGainMin	drv/DRS.h	/^   double          fGainMin;$/;"	m	class:ResponseCalibration
+fHasMultiBuffer	drv/DRS.h	/^   int                  fHasMultiBuffer;$/;"	m	class:DRSBoard
+fHasOffsetCalibration	drv/DRS.h	/^      int                     fHasOffsetCalibration;                  \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fId	libs/TEvent.h	/^		int		fId; \/\/event id$/;"	m	class:TEvent
+fInitialized	drv/DRS.h	/^   bool             fInitialized;$/;"	m	class:ResponseCalibration
+fIntRevers	drv/DRS.cpp	/^float ResponseCalibration::CalibrationData::fIntRevers[2 * kBSplineOrder - 2];$/;"	m	class:ResponseCalibration::CalibrationData	file:
+fIntRevers	drv/DRS.h	/^      static float            fIntRevers[2 * kBSplineOrder - 2];$/;"	m	class:ResponseCalibration::CalibrationData
+fLimitGroup	drv/DRS.h	/^         unsigned char   fLimitGroup[kNumberOfBins];           \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fLookUp	drv/DRS.h	/^         unsigned char  *fLookUp[kNumberOfBins];               \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fLookUpOffset	drv/DRS.h	/^         unsigned short  fLookUpOffset[kNumberOfBins];         \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fMax	drv/DRS.h	/^      float                   fMax;                                   \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fMaxChips	drv/DRS.h	/^   int                  fMaxChips;$/;"	m	class:DRSBoard
+fMin	drv/DRS.h	/^         float           fMin[kNumberOfBins];                  \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fMin	drv/DRS.h	/^      float                   fMin;                                   \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fMultiBuffer	drv/DRS.h	/^   int                  fMultiBuffer;$/;"	m	class:DRSBoard
+fNMultiBuffer	drv/DRS.h	/^   int                  fNMultiBuffer;$/;"	m	class:DRSBoard
+fNumberOfBoards	drv/DRS.h	/^   int             fNumberOfBoards;$/;"	m	class:DRS
+fNumberOfChannels	drv/DRS.h	/^   int                  fNumberOfChannels;$/;"	m	class:DRSBoard
+fNumberOfChips	drv/DRS.h	/^   int                  fNumberOfChips;$/;"	m	class:DRSBoard
+fNumberOfFrequencies	drv/DRS.h	/^      int            fNumberOfFrequencies;$/;"	m	class:DRSBoard::TimeData
+fNumberOfGridPoints	drv/DRS.h	/^      unsigned char           fNumberOfGridPoints;                    \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fNumberOfGridPoints	drv/DRS.h	/^   int              fNumberOfGridPoints;$/;"	m	class:ResponseCalibration
+fNumberOfLimitGroups	drv/DRS.h	/^      unsigned char           fNumberOfLimitGroups;                   \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fNumberOfLookUpPoints	drv/DRS.h	/^         unsigned char   fNumberOfLookUpPoints[kNumberOfBins]; \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fNumberOfMode2Bins	drv/DRS.h	/^   int              fNumberOfMode2Bins;$/;"	m	class:ResponseCalibration
+fNumberOfPoints	drv/DRS.h	/^   int              fNumberOfPoints;$/;"	m	class:ResponseCalibration
+fNumberOfPointsLowVolt	drv/DRS.h	/^   int              fNumberOfPointsLowVolt;$/;"	m	class:ResponseCalibration
+fNumberOfReadoutChannels	drv/DRS.h	/^   int                  fNumberOfReadoutChannels;$/;"	m	class:DRSBoard
+fNumberOfSamples	drv/DRS.h	/^   int              fNumberOfSamples;$/;"	m	class:ResponseCalibration
+fNumberOfTimeData	drv/DRS.h	/^   int                  fNumberOfTimeData;$/;"	m	class:DRSBoard
+fNumberOfXConstGridPoints	drv/DRS.h	/^   int              fNumberOfXConstGridPoints;$/;"	m	class:ResponseCalibration
+fNumberOfXConstPoints	drv/DRS.h	/^   int              fNumberOfXConstPoints;$/;"	m	class:ResponseCalibration
+fOffset	drv/DRS.h	/^         short           fOffset[kNumberOfBins];               \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fOffset	drv/DRS.h	/^   bool             fOffset;$/;"	m	class:ResponseCalibration
+fOffsetADC	drv/DRS.h	/^         unsigned short  fOffsetADC[kNumberOfBins];            \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fPntX	drv/DRS.h	/^   float           *fPntX[2];$/;"	m	class:ResponseCalibration
+fPntY	drv/DRS.h	/^   float           *fPntY[2];$/;"	m	class:ResponseCalibration
+fPrecision	drv/DRS.h	/^   double           fPrecision;$/;"	m	class:ResponseCalibration
+fROFS	drv/DRS.h	/^   double               fROFS;$/;"	m	class:DRSBoard
+fRange	drv/DRS.h	/^         float           fRange[kNumberOfBins];                \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fRange	drv/DRS.h	/^   double               fRange;$/;"	m	class:DRSBoard
+fRead	drv/DRS.h	/^      bool                    fRead;                                  \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fReadPointer	drv/DRS.h	/^   unsigned short       fReadPointer;$/;"	m	class:DRSBoard
+fReadoutChannelConfig	drv/DRS.h	/^   int                  fReadoutChannelConfig;$/;"	m	class:DRSBoard
+fReadoutMode	drv/DRS.h	/^   int                  fReadoutMode;$/;"	m	class:DRSBoard
+fRecorded	drv/DRS.h	/^   bool             fRecorded;$/;"	m	class:ResponseCalibration
+fRefClock	drv/DRS.h	/^   double               fRefClock;$/;"	m	class:DRSBoard
+fRefclk	drv/DRS.h	/^   int                  fRefclk;$/;"	m	class:DRSBoard
+fRequiredFirmwareVersion	drv/DRS.h	/^   int                  fRequiredFirmwareVersion;$/;"	m	class:DRSBoard
+fRes	drv/DRS.h	/^   float           *fRes[kNumberOfBins];$/;"	m	class:ResponseCalibration
+fResX	drv/DRS.h	/^   float           *fResX[kNumberOfBins];$/;"	m	class:ResponseCalibration
+fResponseCalibration	drv/DRS.h	/^   ResponseCalibration *fResponseCalibration;$/;"	m	class:DRSBoard
+fResponseX	drv/DRS.h	/^   float           *fResponseX[10][kNumberOfBins];$/;"	m	class:ResponseCalibration
+fResponseY	drv/DRS.h	/^   float           *fResponseY;$/;"	m	class:ResponseCalibration
+fSampleUsed	drv/DRS.h	/^   int             *fSampleUsed;$/;"	m	class:ResponseCalibration
+fSamples	drv/DRS.h	/^   unsigned short  *fSamples;$/;"	m	class:ResponseCalibration
+fShowStatistics	drv/DRS.h	/^   int              fShowStatistics;$/;"	m	class:ResponseCalibration
+fSlotNumber	drv/DRS.h	/^   int                  fSlotNumber;$/;"	m	class:DRSBoard
+fStartTemperature	drv/DRS.h	/^      float                   fStartTemperature;                      \/\/!$/;"	m	class:ResponseCalibration::CalibrationData
+fStatisticsApprox	drv/DRS.h	/^   float          **fStatisticsApprox;$/;"	m	class:ResponseCalibration
+fStatisticsApproxExt	drv/DRS.h	/^   float          **fStatisticsApproxExt;$/;"	m	class:ResponseCalibration
+fStopCell	drv/DRS.h	/^   unsigned short       fStopCell[4];$/;"	m	class:DRSBoard
+fStopWSR	drv/DRS.h	/^   unsigned char        fStopWSR[4];$/;"	m	class:DRSBoard
+fSyncDelay	drv/DRS.h	/^   int                  fSyncDelay;$/;"	m	class:DRSBoard
+fTCALFrequency	drv/DRS.h	/^   double               fTCALFrequency;$/;"	m	class:DRSBoard
+fTcalFreq	drv/DRS.h	/^   int                  fTcalFreq;$/;"	m	class:DRSBoard
+fTcalLevel	drv/DRS.h	/^   int                  fTcalLevel;$/;"	m	class:DRSBoard
+fTcalPhase	drv/DRS.h	/^   int                  fTcalPhase;$/;"	m	class:DRSBoard
+fTcalSource	drv/DRS.h	/^   int                  fTcalSource;$/;"	m	class:DRSBoard
+fTempData	drv/DRS.h	/^         float          *fTempData;                            \/\/!$/;"	m	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+fTimeData	drv/DRS.h	/^   TimeData           **fTimeData;$/;"	m	class:DRSBoard
+fTimingCalibratedFrequency	drv/DRS.h	/^   double               fTimingCalibratedFrequency;$/;"	m	class:DRSBoard
+fTranspMode	drv/DRS.h	/^   int                  fTranspMode;$/;"	m	class:DRSBoard
+fTransport	drv/DRS.h	/^   unsigned int         fTransport;$/;"	m	class:DRSBoard
+fTriggerBus	drv/DRS.h	/^   unsigned short       fTriggerBus;$/;"	m	class:DRSBoard
+fTriggerDelay	drv/DRS.h	/^   int                  fTriggerDelay;$/;"	m	class:DRSBoard
+fTriggerDelayNs	drv/DRS.h	/^   double               fTriggerDelayNs;$/;"	m	class:DRSBoard
+fTriggerEnable1	drv/DRS.h	/^   int                  fTriggerEnable1;$/;"	m	class:DRSBoard
+fTriggerEnable2	drv/DRS.h	/^   int                  fTriggerEnable2;$/;"	m	class:DRSBoard
+fTriggerFrequency	drv/DRS.h	/^   double           fTriggerFrequency;$/;"	m	class:ResponseCalibration
+fTriggerSource	drv/DRS.h	/^   int                  fTriggerSource;$/;"	m	class:DRSBoard
+fTriggerStartBin	drv/DRS.h	/^   int                  fTriggerStartBin; \/\/ Start Bin of the trigger$/;"	m	class:DRSBoard
+fUValues	drv/DRS.h	/^   float           *fUValues[2];$/;"	m	class:ResponseCalibration
+fUsbInterface	drv/DRS.h	/^   MUSB_INTERFACE      *fUsbInterface;$/;"	m	class:DRSBoard
+fVmeInterface	drv/DRS.h	/^   MVME_INTERFACE      *fVmeInterface;$/;"	m	class:DRSBoard
+fVmeInterface	drv/DRS.h	/^   MVME_INTERFACE *fVmeInterface;$/;"	m	class:DRS
+fVoltageCalibrationValid	drv/DRS.h	/^   bool                 fVoltageCalibrationValid;$/;"	m	class:DRSBoard
+fWSRLoop	drv/DRS.h	/^   int                  fWSRLoop;$/;"	m	class:DRSBoard
+fWWFit	drv/DRS.h	/^   double          *fWWFit;$/;"	m	class:ResponseCalibration
+fWaveFormMode2	drv/DRS.h	/^   unsigned short **fWaveFormMode2[10];$/;"	m	class:ResponseCalibration
+fWaveFormMode3	drv/DRS.h	/^   unsigned short **fWaveFormMode3[10];$/;"	m	class:ResponseCalibration
+fWaveFormOffset	drv/DRS.h	/^   short          **fWaveFormOffset[10];$/;"	m	class:ResponseCalibration
+fWaveFormOffsetADC	drv/DRS.h	/^   unsigned short **fWaveFormOffsetADC[10];$/;"	m	class:ResponseCalibration
+fWaveTransferred	drv/DRS.h	/^   bool                 fWaveTransferred[kNumberOfChipsMax * kNumberOfChannelsMax];$/;"	m	class:DRSBoard
+fWaveforms	drv/DRS.h	/^   unsigned char        fWaveforms[kNumberOfChipsMax * kNumberOfChannelsMax * 2 * kNumberOfBins];$/;"	m	class:DRSBoard
+fXXFit	drv/DRS.h	/^   double          *fXXFit;$/;"	m	class:ResponseCalibration
+fXXSave	drv/DRS.h	/^   double          *fXXSave;$/;"	m	class:ResponseCalibration
+fYYFit	drv/DRS.h	/^   double          *fYYFit;$/;"	m	class:ResponseCalibration
+fYYFitRes	drv/DRS.h	/^   double          *fYYFitRes;$/;"	m	class:ResponseCalibration
+fYYSave	drv/DRS.h	/^   double          *fYYSave;$/;"	m	class:ResponseCalibration
+fbkAcalMode	drv/DRS.h	/^   int                  fbkAcalMode;$/;"	m	class:DRSBoard
+fbkAcalVolt	drv/DRS.h	/^   double               fbkAcalVolt;$/;"	m	class:DRSBoard
+fbkTcalFreq	drv/DRS.h	/^   int                  fbkTcalFreq;$/;"	m	class:DRSBoard
+fbkTcalLevel	drv/DRS.h	/^   int                  fbkTcalLevel;$/;"	m	class:DRSBoard
+fh	drv/mxml.h	/^   int  fh;$/;"	m	struct:__anon1
+fpTimeArray	libs/TEvent.h	/^		float fpTimeArray[1024];$/;"	m	class:TEvent
+fpWaveArray	libs/TEvent.h	/^		float	fpWaveArray[4][1024]; $/;"	m	class:TEvent
+free	libs/TEventDict.cpp	178;"	d	file:
+getch	drscl.cpp	53;"	d	file:
+getch	drv/DRS.cpp	/^static inline int getch()$/;"	f	file:
+htmp	drv/DRS.cpp	/^static unsigned short htmp[WFH_SIZE];$/;"	v	file:
+icenter	drv/DRS.cpp	/^static int            icenter[kNumberOfChipsMax][kNumberOfChannelsMax][kNumberOfBins];$/;"	v	file:
+idx	drv/DRS.cpp	/^int idx[4][10] = {$/;"	v
+interface	drv/musbstd.h	/^   void *interface;$/;"	m	struct:__anon6
+kBSplineOrder	drv/DRS.h	/^   kBSplineOrder                =    4,$/;"	e	enum:DRSBoardConstants
+kBSplineXMinOffset	drv/DRS.h	/^   kBSplineXMinOffset           =   20,$/;"	e	enum:DRSBoardConstants
+kFrequencyCacheSize	drv/DRS.h	/^   kFrequencyCacheSize          =   10,$/;"	e	enum:DRSBoardConstants
+kInvalidTransport	drv/DRS.h	/^   kInvalidTransport            = -3,$/;"	e	enum:DRSErrorCodes
+kInvalidTriggerSignal	drv/DRS.h	/^   kInvalidTriggerSignal        = -1,$/;"	e	enum:DRSErrorCodes
+kMaxNumberOfBoards	drv/DRS.h	/^      kMaxNumberOfBoards = 40$/;"	e	enum:DRS::__anon3
+kMaxNumberOfClockCycles	drv/DRS.h	/^   kMaxNumberOfClockCycles      =  100,$/;"	e	enum:DRSBoardConstants
+kMaxNumberOfFrequencies	drv/DRS.h	/^         kMaxNumberOfFrequencies = 4000$/;"	e	enum:DRSBoard::TimeData::__anon2
+kNumberOfADCBins	drv/DRS.h	/^   kNumberOfADCBins             = 4096,$/;"	e	enum:DRSBoardConstants
+kNumberOfBins	drv/DRS.h	/^   kNumberOfBins                = 1024,$/;"	e	enum:DRSBoardConstants
+kNumberOfCalibChannelsV3	drv/DRS.h	/^   kNumberOfCalibChannelsV3     =   10,$/;"	e	enum:DRSBoardConstants
+kNumberOfCalibChannelsV4	drv/DRS.h	/^   kNumberOfCalibChannelsV4     =    8,$/;"	e	enum:DRSBoardConstants
+kNumberOfChannelsMax	drv/DRS.h	/^   kNumberOfChannelsMax         =   10,$/;"	e	enum:DRSBoardConstants
+kNumberOfChipsMax	drv/DRS.h	/^   kNumberOfChipsMax            =    4,$/;"	e	enum:DRSBoardConstants
+kPreCaliculatedBSplineGroups	drv/DRS.h	/^   kPreCaliculatedBSplineGroups =    5,$/;"	e	enum:DRSBoardConstants
+kPreCaliculatedBSplines	drv/DRS.h	/^   kPreCaliculatedBSplines      = 1000,$/;"	e	enum:DRSBoardConstants
+kSuccess	drv/DRS.h	/^   kSuccess                     =  0,$/;"	e	enum:DRSErrorCodes
+kWaveNotAvailable	drv/DRS.h	/^   kWaveNotAvailable            = -5$/;"	e	enum:DRSErrorCodes
+kWrongChannelOrChip	drv/DRS.h	/^   kWrongChannelOrChip          = -2,$/;"	e	enum:DRSErrorCodes
+kZeroSuppression	drv/DRS.h	/^   kZeroSuppression             = -4,$/;"	e	enum:DRSErrorCodes
+kbhit	drscl.cpp	/^int kbhit()$/;"	f
+level	drv/mxml.h	/^   int  level;$/;"	m	struct:__anon1
+line_number_end	drv/mxml.h	/^   int        line_number_end;         \/\/ last line number in XML file, starting from 1$/;"	m	struct:mxml_struct
+line_number_start	drv/mxml.h	/^   int        line_number_start;       \/\/ first line number in XML file, starting from 1$/;"	m	struct:mxml_struct
+main	drscl.cpp	/^int main()$/;"	f
+main	test.cpp	/^int main(int argc, char** argv)$/;"	f
+malloc	libs/TEventDict.cpp	177;"	d	file:
+match	drscl.cpp	/^int match(char *str, char *cmd)$/;"	f
+millitime	drv/DRS.cpp	/^unsigned int millitime()$/;"	f
+musb_close	drv/musbstd.c	/^int musb_close(MUSB_INTERFACE *musb_interface)$/;"	f
+musb_open	drv/musbstd.c	/^int musb_open(MUSB_INTERFACE **musb_interface, int vendor, int product, int instance, int configuration, int usbinterface)$/;"	f
+musb_read	drv/musbstd.c	/^int musb_read(MUSB_INTERFACE *musb_interface, int endpoint, void *buf, int count, int timeout)$/;"	f
+musb_reset	drv/musbstd.c	/^int musb_reset(MUSB_INTERFACE *musb_interface)$/;"	f
+musb_set_altinterface	drv/musbstd.c	/^int musb_set_altinterface(MUSB_INTERFACE *musb_interface, int index)$/;"	f
+musb_write	drv/musbstd.c	/^int musb_write(MUSB_INTERFACE *musb_interface, int endpoint, const void *buf, int count, int timeout)$/;"	f
+mxml_add_attribute	drv/mxml.c	/^int mxml_add_attribute(PMXML_NODE pnode, const char *attrib_name, const char *attrib_value)$/;"	f
+mxml_add_node	drv/mxml.c	/^PMXML_NODE mxml_add_node(PMXML_NODE parent, const char *node_name, const char *value)$/;"	f
+mxml_add_node_at	drv/mxml.c	/^PMXML_NODE mxml_add_node_at(PMXML_NODE parent, const char *node_name, const char *value, int idx)$/;"	f
+mxml_add_resultnode	drv/mxml.c	/^int mxml_add_resultnode(PMXML_NODE node, const char *xml_path, PMXML_NODE **nodelist, int *found)$/;"	f
+mxml_add_special_node	drv/mxml.c	/^PMXML_NODE mxml_add_special_node(PMXML_NODE parent, int node_type, const char *node_name, const char *value)$/;"	f
+mxml_add_special_node_at	drv/mxml.c	/^PMXML_NODE mxml_add_special_node_at(PMXML_NODE parent, int node_type, const char *node_name, const char *value, int idx)$/;"	f
+mxml_add_tree	drv/mxml.c	/^int mxml_add_tree(PMXML_NODE parent, PMXML_NODE tree)$/;"	f
+mxml_add_tree_at	drv/mxml.c	/^int mxml_add_tree_at(PMXML_NODE parent, PMXML_NODE tree, int idx)$/;"	f
+mxml_basename	drv/mxml.c	/^void mxml_basename(char *path)$/;"	f
+mxml_clone_tree	drv/mxml.c	/^PMXML_NODE mxml_clone_tree(PMXML_NODE tree)$/;"	f
+mxml_close_buffer	drv/mxml.c	/^char *mxml_close_buffer(MXML_WRITER *writer)$/;"	f
+mxml_close_file	drv/mxml.c	/^int mxml_close_file(MXML_WRITER *writer)$/;"	f
+mxml_create_root_node	drv/mxml.c	/^PMXML_NODE mxml_create_root_node(void)$/;"	f
+mxml_deallocate	drv/mxml.c	/^void mxml_deallocate(void)$/;"	f
+mxml_debug_tree	drv/mxml.c	/^void mxml_debug_tree(PMXML_NODE tree, int level)$/;"	f
+mxml_decode	drv/mxml.c	/^void mxml_decode(char *str)$/;"	f
+mxml_delete_attribute	drv/mxml.c	/^int mxml_delete_attribute(PMXML_NODE pnode, const char *attrib_name)$/;"	f
+mxml_delete_node	drv/mxml.c	/^int mxml_delete_node(PMXML_NODE pnode)$/;"	f
+mxml_dirname	drv/mxml.c	/^void mxml_dirname(char *path)$/;"	f
+mxml_encode	drv/mxml.c	/^void mxml_encode(char *src, int size, int translate)$/;"	f
+mxml_end_element	drv/mxml.c	/^int mxml_end_element(MXML_WRITER *writer)$/;"	f
+mxml_find_node	drv/mxml.c	/^PMXML_NODE mxml_find_node(PMXML_NODE tree, const char *xml_path)$/;"	f
+mxml_find_nodes	drv/mxml.c	/^int mxml_find_nodes(PMXML_NODE tree, const char *xml_path, PMXML_NODE **nodelist)$/;"	f
+mxml_find_nodes1	drv/mxml.c	/^int mxml_find_nodes1(PMXML_NODE tree, const char *xml_path, PMXML_NODE **nodelist, int *found)$/;"	f
+mxml_free	drv/mxml.c	/^void mxml_free(void *p)$/;"	f
+mxml_free_tree	drv/mxml.c	/^void mxml_free_tree(PMXML_NODE tree)$/;"	f
+mxml_get_attribute	drv/mxml.c	/^char *mxml_get_attribute(PMXML_NODE pnode, const char *name)$/;"	f
+mxml_get_line_number_end	drv/mxml.c	/^int mxml_get_line_number_end(PMXML_NODE pnode)$/;"	f
+mxml_get_line_number_start	drv/mxml.c	/^int mxml_get_line_number_start(PMXML_NODE pnode)$/;"	f
+mxml_get_name	drv/mxml.c	/^char *mxml_get_name(PMXML_NODE pnode)$/;"	f
+mxml_get_node_at_line	drv/mxml.c	/^PMXML_NODE mxml_get_node_at_line(PMXML_NODE tree, int line_number)$/;"	f
+mxml_get_number_of_children	drv/mxml.c	/^int mxml_get_number_of_children(PMXML_NODE pnode)$/;"	f
+mxml_get_value	drv/mxml.c	/^char *mxml_get_value(PMXML_NODE pnode)$/;"	f
+mxml_malloc	drv/mxml.c	/^void *mxml_malloc(size_t size)$/;"	f
+mxml_open_buffer	drv/mxml.c	/^MXML_WRITER *mxml_open_buffer(void)$/;"	f
+mxml_open_file	drv/mxml.c	/^MXML_WRITER *mxml_open_file(const char *file_name) $/;"	f
+mxml_parse_buffer	drv/mxml.c	/^PMXML_NODE mxml_parse_buffer(const char *buf, char *error, int error_size)$/;"	f
+mxml_parse_entity	drv/mxml.c	/^int mxml_parse_entity(char **buf, const char *file_name, char *error, int error_size)$/;"	f
+mxml_parse_file	drv/mxml.c	/^PMXML_NODE mxml_parse_file(const char *file_name, char *error, int error_size)$/;"	f
+mxml_realloc	drv/mxml.c	/^void *mxml_realloc(void *p, size_t size)$/;"	f
+mxml_replace_attribute_name	drv/mxml.c	/^int mxml_replace_attribute_name(PMXML_NODE pnode, const char *old_name, const char *new_name)$/;"	f
+mxml_replace_attribute_value	drv/mxml.c	/^int mxml_replace_attribute_value(PMXML_NODE pnode, const char *attrib_name, const char *attrib_value)$/;"	f
+mxml_replace_node_name	drv/mxml.c	/^int mxml_replace_node_name(PMXML_NODE pnode, const char *name)$/;"	f
+mxml_replace_node_value	drv/mxml.c	/^int mxml_replace_node_value(PMXML_NODE pnode, const char *value)$/;"	f
+mxml_replace_subvalue	drv/mxml.c	/^int mxml_replace_subvalue(PMXML_NODE pnode, const char *name, const char *value)$/;"	f
+mxml_set_translate	drv/mxml.c	/^int mxml_set_translate(MXML_WRITER *writer, int flag)$/;"	f
+mxml_start_element	drv/mxml.c	/^int mxml_start_element(MXML_WRITER *writer, const char *name)$/;"	f
+mxml_start_element1	drv/mxml.c	/^int mxml_start_element1(MXML_WRITER *writer, const char *name, int indent)$/;"	f
+mxml_start_element_noindent	drv/mxml.c	/^int mxml_start_element_noindent(MXML_WRITER *writer, const char *name)$/;"	f
+mxml_struct	drv/mxml.h	/^typedef struct mxml_struct {$/;"	s
+mxml_subnode	drv/mxml.c	/^PMXML_NODE mxml_subnode(PMXML_NODE pnode, int idx)$/;"	f
+mxml_suppress_date	drv/mxml.c	/^void mxml_suppress_date(int suppress)$/;"	f
+mxml_suppress_date_flag	drv/mxml.c	/^static int mxml_suppress_date_flag = 0; \/* suppress writing date at the top of file. *\/$/;"	v	file:
+mxml_write_attribute	drv/mxml.c	/^int mxml_write_attribute(MXML_WRITER *writer, const char *name, const char *value)$/;"	f
+mxml_write_comment	drv/mxml.c	/^int mxml_write_comment(MXML_WRITER *writer, const char *string)$/;"	f
+mxml_write_element	drv/mxml.c	/^int mxml_write_element(MXML_WRITER *writer, const char *name, const char *value)$/;"	f
+mxml_write_empty_line	drv/mxml.c	/^int mxml_write_empty_line(MXML_WRITER *writer)$/;"	f
+mxml_write_line	drv/mxml.c	/^int mxml_write_line(MXML_WRITER *writer, const char *line)$/;"	f
+mxml_write_subtree	drv/mxml.c	/^int mxml_write_subtree(MXML_WRITER *writer, PMXML_NODE tree, int indent)$/;"	f
+mxml_write_tree	drv/mxml.c	/^int mxml_write_tree(const char *file_name, PMXML_NODE tree)$/;"	f
+mxml_write_value	drv/mxml.c	/^int mxml_write_value(MXML_WRITER *writer, const char *data)$/;"	f
+n_attributes	drv/mxml.h	/^   int        n_attributes;            \/\/ list of attributes$/;"	m	struct:mxml_struct
+n_children	drv/mxml.h	/^   int        n_children;              \/\/ list of children$/;"	m	struct:mxml_struct
+name	drv/mxml.h	/^   char       name[MXML_NAME_LENGTH];  \/\/ name of element    <[name]>[value]<\/[name]>$/;"	m	struct:mxml_struct
+newArray_TEvent	libs/TEventDict.cpp	/^   static void *newArray_TEvent(Long_t nElements, void *p) {$/;"	f	namespace:ROOT
+new_TEvent	libs/TEventDict.cpp	/^   static void *new_TEvent(void *p) {$/;"	f	namespace:ROOT
+node_type	drv/mxml.h	/^   int        node_type;               \/\/ type of node XXX_NODE$/;"	m	struct:mxml_struct
+p	libs/TEventDict.cpp	/^    size_t (G__Sizep2memfuncTEventDict::*p)();$/;"	m	class:G__Sizep2memfuncTEventDict	file:
+parent	drv/mxml.h	/^   PMXML_NODE parent;                  \/\/ pointer to parent element$/;"	m	struct:mxml_struct
+print_help	drscl.cpp	/^void print_help()$/;"	f
+private	libs/TEventDict.cpp	11;"	d	file:
+protected	libs/TEventDict.cpp	12;"	d	file:
+read_error	drv/mxml.c	/^PMXML_NODE read_error(PMXML_NODE root, const char *file_name, int line_number, char *error, int error_size, const char *format, ...)$/;"	f
+rhandle	drv/musbstd.h	/^   HANDLE rhandle;$/;"	m	struct:__anon5
+rootfile	test.cpp	/^TFile *rootfile;$/;"	v
+s_drsMutex	drv/DRS.cpp	/^static wxMutex *s_drsMutex = NULL; \/\/ used for wxWidgets multi-threaded programs$/;"	v	file:
+sizep2memfunc	libs/TEventDict.cpp	/^    size_t sizep2memfunc() { return(sizeof(p)); }$/;"	f	class:G__Sizep2memfuncTEventDict
+stack	drv/mxml.h	/^   char **stack;$/;"	m	struct:__anon1
+std	libs/TEventDict.cpp	/^namespace std {} using namespace std;$/;"	n	file:
+std	libs/TEventDict.h	/^namespace std { }$/;"	n
+streamer_TEvent	libs/TEventDict.cpp	/^   static void streamer_TEvent(TBuffer &buf, void *obj) {$/;"	f	namespace:ROOT
+strlcat	drv/strlcpy.c	/^size_t strlcat(char *dst, const char *src, size_t size)$/;"	f
+strlcpy	drv/strlcpy.c	/^size_t strlcpy(char *dst, const char *src, size_t size)$/;"	f
+swf	drv/DRS.cpp	/^static unsigned short swf[kNumberOfChipsMax][kNumberOfChannelsMax][kNumberOfBins];$/;"	v	file:
+t	test.cpp	/^TTree *t;$/;"	v
+target	Makefile	/^target:= r$/;"	m
+time_array	test.cpp	/^float time_array[1024];$/;"	v
+translate	drv/mxml.h	/^   int  translate;$/;"	m	struct:__anon1
+usb2_buffer	drv/DRS.cpp	/^unsigned char static *usb2_buffer = NULL;$/;"	v	file:
+usb_configuration	drv/musbstd.h	/^   int usb_configuration;$/;"	m	struct:__anon4
+usb_configuration	drv/musbstd.h	/^   int usb_configuration;$/;"	m	struct:__anon6
+usb_interface	drv/musbstd.h	/^   int usb_interface;$/;"	m	struct:__anon4
+usb_interface	drv/musbstd.h	/^   int usb_interface;$/;"	m	struct:__anon6
+usb_type	drv/musbstd.h	/^   int usb_type;$/;"	m	struct:__anon4
+usb_type	drv/musbstd.h	/^   int usb_type;$/;"	m	struct:__anon5
+usb_type	drv/musbstd.h	/^   int usb_type;$/;"	m	struct:__anon6
+value	drv/mxml.h	/^   char       *value;                  \/\/ value of element$/;"	m	struct:mxml_struct
+wave_array	test.cpp	/^float wave_array[8][1024];$/;"	v
+weight	drv/DRS.cpp	/^static float weight[] = { $/;"	v	file:
+wf1	drv/DRS.cpp	/^                      wf1[kNumberOfChipsMax*kNumberOfChannelsMax*kNumberOfChipsMax][1024], $/;"	v	file:
+wf2	drv/DRS.cpp	/^                      wf2[kNumberOfChipsMax*kNumberOfChannelsMax*kNumberOfChipsMax][1024],$/;"	v	file:
+wf3	drv/DRS.cpp	/^                      wf3[kNumberOfChipsMax*kNumberOfChannelsMax*kNumberOfChipsMax][1024];$/;"	v	file:
+wfh	drv/DRS.cpp	/^static unsigned short wfh[kNumberOfChipsMax][kNumberOfChannelsMax][kNumberOfBins][WFH_SIZE];$/;"	v	file:
+wft	drv/DRS.cpp	/^static unsigned short wft[kNumberOfChipsMax*kNumberOfChannelsMax*kNumberOfChipsMax][1024], $/;"	v	file:
+whandle	drv/musbstd.h	/^   HANDLE whandle;$/;"	m	struct:__anon5
+~CalibrationData	drv/DRS.cpp	/^ResponseCalibration::CalibrationData::~CalibrationData()$/;"	f	class:ResponseCalibration::CalibrationData
+~CalibrationDataChannel	drv/DRS.h	/^         ~CalibrationDataChannel() {$/;"	f	class:ResponseCalibration::CalibrationData::CalibrationDataChannel
+~DRS	drv/DRS.cpp	/^DRS::~DRS()$/;"	f	class:DRS
+~DRSBoard	drv/DRS.cpp	/^DRSBoard::~DRSBoard()$/;"	f	class:DRSBoard
+~DRSCallback	drv/DRS.h	/^   virtual ~DRSCallback() {};$/;"	f	class:DRSCallback
+~G__cpp_setup_initTEventDict	libs/TEventDict.cpp	/^   ~G__cpp_setup_initTEventDict() { G__remove_setup_func("TEventDict"); }$/;"	f	class:G__cpp_setup_initTEventDict
+~ResponseCalibration	drv/DRS.cpp	/^ResponseCalibration::~ResponseCalibration()$/;"	f	class:ResponseCalibration
+~TEvent	libs/TEvent.h	/^		~TEvent() {;}$/;"	f	class:TEvent
+~TimeData	drv/DRS.h	/^      ~TimeData() {$/;"	f	class:DRSBoard::TimeData

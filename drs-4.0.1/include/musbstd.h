@@ -1,11 +1,11 @@
 /********************************************************************\
 
-  Name:         musbstd.h
-  Created by:   Konstantin Olchanski, Stefan Ritt
+Name:         musbstd.h
+Created by:   Konstantin Olchanski, Stefan Ritt
 
-  Contents:     Midas USB access
+Contents:     Midas USB access
 
-  $Id: musbstd.h 5344 2012-11-27 11:27:14Z ritt $
+$Id: musbstd.h 5344 2012-11-27 11:27:14Z ritt $
 
 \********************************************************************/
 
@@ -17,10 +17,10 @@
 #include <usb.h>
 
 typedef struct {
-   usb_dev_handle *dev;
-   int usb_configuration;
-   int usb_interface;
-   int usb_type;
+	usb_dev_handle *dev;
+	int usb_configuration;
+	int usb_interface;
+	int usb_type;
 } MUSB_INTERFACE;
 
 #elif defined(HAVE_LIBUSB10)
@@ -28,10 +28,10 @@ typedef struct {
 #include <libusb-1.0/libusb.h>
 
 typedef struct {
-   libusb_device_handle *dev;
-   int usb_configuration;
-   int usb_interface;
-   int usb_type;
+	libusb_device_handle *dev;
+	int usb_configuration;
+	int usb_interface;
+	int usb_type;
 } MUSB_INTERFACE;
 
 #elif defined(_MSC_VER)
@@ -39,19 +39,19 @@ typedef struct {
 #include <windows.h>
 
 typedef struct {
-   HANDLE rhandle;
-   HANDLE whandle;
-   int usb_type;
+	HANDLE rhandle;
+	HANDLE whandle;
+	int usb_type;
 } MUSB_INTERFACE;
 
 #elif defined(OS_DARWIN)
 
 typedef struct {
-   void *device;
-   void *interface;
-   int usb_configuration;
-   int usb_interface;
-   int usb_type;
+	void *device;
+	void *interface;
+	int usb_configuration;
+	int usb_interface;
+	int usb_type;
 } MUSB_INTERFACE;
 
 #else
@@ -71,7 +71,7 @@ typedef struct {
 extern "C" {
 #endif
 
-/* make functions under WinNT dll exportable */
+	/* make functions under WinNT dll exportable */
 #ifndef EXPRT
 #if defined(_MSC_VER) && defined(_USRDLL)
 #define EXPRT __declspec(dllexport)
@@ -80,13 +80,13 @@ extern "C" {
 #endif
 #endif
 
-int EXPRT musb_open(MUSB_INTERFACE **musb_interface, int vendor, int product, int instance, int configuration, int usbinterface);
-int EXPRT musb_close(MUSB_INTERFACE *musb_interface);
-int EXPRT musb_write(MUSB_INTERFACE *musb_interface,int endpoint,const void *buf,int count,int timeout_ms);
-int EXPRT musb_read(MUSB_INTERFACE *musb_interface,int endpoint,void *buf,int count,int timeout_ms);
-int EXPRT musb_reset(MUSB_INTERFACE *musb_interface);
-int EXPRT musb_set_altinterface(MUSB_INTERFACE *musb_interface, int index);
-int EXPRT musb_get_device(MUSB_INTERFACE *musb_interface);
+	int EXPRT musb_open(MUSB_INTERFACE **musb_interface, int vendor, int product, int instance, int configuration, int usbinterface);
+	int EXPRT musb_close(MUSB_INTERFACE *musb_interface);
+	int EXPRT musb_write(MUSB_INTERFACE *musb_interface,int endpoint,const void *buf,int count,int timeout_ms);
+	int EXPRT musb_read(MUSB_INTERFACE *musb_interface,int endpoint,void *buf,int count,int timeout_ms);
+	int EXPRT musb_reset(MUSB_INTERFACE *musb_interface);
+	int EXPRT musb_set_altinterface(MUSB_INTERFACE *musb_interface, int index);
+	int EXPRT musb_get_device(MUSB_INTERFACE *musb_interface);
 
 #ifdef __cplusplus
 }

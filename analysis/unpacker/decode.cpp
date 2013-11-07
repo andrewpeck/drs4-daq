@@ -44,6 +44,40 @@ struct Waveform_t {
 
 using namespace std; 
 
+double fraction=0.50; 
+double Vthresh=-10.0;
+
+void FlightTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, double& Qint, double Vpeak, int PeakBin)
+{
+	bool FTHCrossed=false;
+	bool CTHCrossed=false;
+
+	for (Int_t i=(PeakBin-20); i<(PeakBin+20); i++) 
+	{
+		//Integrate Charge
+		Qint+=chn[i];
+		//Find Constant Threshold Cross Time
+		if (CTHCrossed==false)
+		{
+			if (chn[i] < Vthresh) 
+			{
+				CTHtime=t[i];
+				CTHCrossed=true;
+			}
+		}
+
+		//Find Fractional Threshold Cross Time
+		if (FTHCrossed==false)
+		{
+			if (chn[i] < (Vpeak*fraction))
+			{
+				FTHtime=t[i];
+				FTHCrossed=true;
+			}
+		}
+	}
+}
+
 void decode(char *filename) {
 	Header_t header;
 	Waveform_t waveform;
@@ -57,13 +91,11 @@ void decode(char *filename) {
 	unsigned short EventDate[7];
 	double Qint[2];
 	double Vpeak[2];
-	double fraction=0.37; 
-	double Vthresh=-10.0;
-	int CTHtime[2];
-	int FTHtime[2];
-	int PeakTime[2];
-	int CTHFlightTime;
-	int FTHFlightTime;
+	double CTHtime[2];
+	double FTHtime[2];
+	double CTHFlightTime;
+	double FTHFlightTime;
+	int PeakBin[2];
 
 	// open the binary waveform file
 	FILE *f = fopen(Form("%s.dat", filename), "r");
@@ -71,8 +103,10 @@ void decode(char *filename) {
 	//open the root file
 	TFile *outfile = new TFile(Form("%s.root", filename), "RECREATE");
 
-	// define the rec tree
+	// plant tree
 	TTree *rec = new TTree("rec","rec");
+
+	//grow branches
 	rec->Branch("t", &t   ,"t[1024]/D");  
 	rec->Branch("eventNum", &eventNum ,"eventNum/I");
 	rec->Branch("EventDate", &EventDate ,"EventDate");
@@ -80,19 +114,19 @@ void decode(char *filename) {
 	rec->Branch("chn0", &chn0, "chn0[1024]/D");
 	rec->Branch("IntegratedCharge0", &Qint[0] ,"IntegratedCharge0/D");
 	rec->Branch("PeakVoltage0", &Vpeak[0],	"PeakVoltage0/D");
-	rec->Branch("PeakTime0", &PeakTime[0],	"PeakTime0/D");
-	rec->Branch("CTHtime0", &CTHtime[0],	"CTHtime0/I");
-	rec->Branch("FTHtime0", &FTHtime[0],	"FTHtime0/I");
+	rec->Branch("PeakBin0", &PeakBin[0],	"PeakBin0/D");
+	rec->Branch("CTHtime0", &CTHtime[0],	"CTHtime0/D");
+	rec->Branch("FTHtime0", &FTHtime[0],	"FTHtime0/D");
 
 	rec->Branch("chn1", &chn1,"chn1[1024]/D");
-	rec->Branch("IntegratedCharge1", &Qint[0] ,"IntegratedCharge1/D");
+	rec->Branch("IntegratedCharge1", &Qint[1] ,"IntegratedCharge1/D");
 	rec->Branch("PeakVoltage1", &Vpeak[1],	"PeakVoltage1/D");
-	rec->Branch("PeakTime1", &PeakTime[1],	"PeakTime1/D");
-	rec->Branch("CTHtime1", &CTHtime[1],	"CTHtime1/I");
-	rec->Branch("FTHtime1", &FTHtime[1],	"FTHtime1/I");
+	rec->Branch("PeakBin1", &PeakBin[1],	"PeakBin1/D");
+	rec->Branch("CTHtime1", &CTHtime[1],	"CTHtime1/D");
+	rec->Branch("FTHtime1", &FTHtime[1],	"FTHtime1/D");
 
-	rec->Branch("CTHFlightTime", &CTHFlightTime,	"CTHFlightTime/I");
-	rec->Branch("FTHFlightTime", &FTHFlightTime,	"FTHFlightTime/I");
+	rec->Branch("CTHFlightTime", &CTHFlightTime,	"CTHFlightTime/D");
+	rec->Branch("FTHFlightTime", &FTHFlightTime,	"FTHFlightTime/D");
 
 	//   rec->Branch("chn3", &chn3 ,"chn3[1024]/D");
 	//   rec->Branch("chn4", &chn4 ,"chn4[1024]/D");
@@ -123,9 +157,7 @@ void decode(char *filename) {
 
 		memset(Qint, 0, sizeof(Qint));
 		memset(Vpeak, 0, sizeof(Vpeak));
-		memset(PeakTime, 0, sizeof(PeakTime));
-
-		cout << sizeof(waveform) << "\n";
+		memset(PeakBin, 0, sizeof(PeakBin));
 
 		// decode amplitudes in mV and find Peak Voltage
 		for (Int_t i=0; i<1024; i++) 
@@ -134,83 +166,19 @@ void decode(char *filename) {
 			if (chn0[i] < Vpeak[0])
 			{
 				Vpeak[0]=chn0[i];
-				PeakTime[0]=i;
-//				if (i<1024 && n==1)
-				//{
-			//		cout << chn0[i] << "\n";	
-			//		cout << Vpeak[0] << "\n";	
-			//		cout << PeakTime[0] << "\n"; 
-				//}
+				PeakBin[0]=i;
 			}
 
 			chn1[i] = (Double_t) ((waveform.chn1[i]) / 65535. - 0.5) * 1000;   
 			if (chn1[i] < Vpeak[0])
 			{
 				Vpeak[1]=chn1[i];
-				PeakTime[1]=i;
-			}
-
-			//chn2[i] = (Double_t) ((waveform.chn3[i]) / 65535. - 0.5) * 1000;   
-			//chn3[i] = (Double_t) ((waveform.chn4[i]) / 65535. - 0.5) * 1000;   
-		}
-
-		bool FTHCrossed=false;
-		bool CTHCrossed=false;
-
-		//Cross Times for Channel 1
-		for (Int_t i=0; i<1024; i++) 
-		{
-			//Integrate Charge
-			Qint[0]+=chn0[i];
-			//Find Constant Threshold Cross Time
-			if (CTHCrossed==false)
-			{
-				if (chn0[i] < Vthresh) 
-				{
-					CTHtime[0]=i;
-					CTHCrossed=true;
-				}
-			}
-
-			//Find Fractional Threshold Cross Time
-			if (FTHCrossed==false)
-			{
-				if (chn0[i] < (Vpeak[0]*fraction))
-				{
-					FTHtime[0]=i;
-					FTHCrossed=true;
-				}
+				PeakBin[1]=i;
 			}
 		}
 
-		FTHCrossed=false;
-		CTHCrossed=false;
-
-		//Cross Times for Channel 2
-		for (Int_t i=0; i<1024; i++) 
-		{
-			//Integrate Charge
-			Qint[1]+=chn1[i];
-			//Find Constant Threshold Cross Time
-			if (CTHCrossed==false)
-			{
-				if (chn1[i] < Vthresh) 
-				{
-					CTHtime[1]=i;
-					CTHCrossed=true;
-				}
-			}
-
-			//Find Fractional Threshold Cross Time
-			if (FTHCrossed==false)
-			{
-				if (chn1[i] < (Vpeak[1]*fraction))
-				{
-					FTHtime[1]=i;
-					FTHCrossed=true;
-				}
-			}
-		}
+		FlightTime(chn0, t, CTHtime[0], FTHtime[0], Qint[0], Vpeak[0], PeakBin[0]);
+		FlightTime(chn1, t, CTHtime[1], FTHtime[1], Qint[1], Vpeak[1], PeakBin[1]);
 
 		CTHFlightTime=CTHtime[1]-CTHtime[0];
 		FTHFlightTime=FTHtime[1]-FTHtime[0];
@@ -232,3 +200,4 @@ void decode(char *filename) {
 	rec->Write();
 	outfile->Close();
 }
+
