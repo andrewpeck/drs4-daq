@@ -90,7 +90,7 @@ int main()
       b->EnableTrigger(0, 1);           // lemo off, analog trigger on
       b->SetTriggerSource(0);           // use CH1 as source
    }
-   b->SetTriggerLevel(-0.05, false);     // 0.05 V, positive edge
+   b->SetTriggerLevel(-0.05, true);     // 0.05 V, positive edge
    b->SetTriggerDelayNs(0);             // zero ns trigger delay
    
    /* use following lines to enable the external trigger */

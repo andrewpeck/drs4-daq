@@ -106,6 +106,7 @@ int main(int argc, char** argv)
 				return 0;
 				break;
 		}
+
 	filestr = dirstr.append(filestr);
 	logfile<<"\tOutput file: "<<filestr<<std::endl;
 	strcpy(filename,filestr.c_str());
@@ -141,6 +142,7 @@ int Scan()
 
 	return 1;
 }
+
 int Init(int boardNo)
 {
 	/* continue working with first board only */
@@ -398,9 +400,9 @@ int Measure()
 		b->StartDomino();
 		if (trigsource>0)
 		{
-		/* wait for trigger */
-		//printf("Waiting for trigger...");
-		//fflush(stdout);
+			/* wait for trigger */
+			//printf("Waiting for trigger...");
+			//fflush(stdout);
 		}
 		else b->SoftTrigger(); //if use soft trigger
 		while (b->IsBusy());

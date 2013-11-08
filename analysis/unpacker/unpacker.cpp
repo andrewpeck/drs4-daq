@@ -78,7 +78,7 @@ void FlightTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, 
 	}
 }
 
-void decode(char *filename) {
+void unpack(char *filename) {
 	Header_t header;
 	Waveform_t waveform;
 	Double_t t[1024];
