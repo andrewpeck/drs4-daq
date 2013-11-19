@@ -95,31 +95,31 @@ void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, d
     double chnInterp[2048];
     InterpolateWaveform(chn,chnInterp);
 
-    for (Int_t i=10; i<1014; i++) 
+    for (Int_t i=10; i<2048; i++) 
     {
-        if ((i>(PeakBin-50)) && (i<(PeakBin+100)))
+        if ((i>2*(PeakBin-50)) && (i<2*(PeakBin+100)))
         {
         //Find Constant Threshold Cross Time & Pulse Width
-            if ( (cth_rise==false) && (chn[i] < Vthresh) )
+            if ( (cth_rise==false) && (chnInterp[i] < Vthresh) )
             {
-                CTHtime=t[i]; 
+                CTHtime=t[i/2]; 
                 cth_rise=true;
             }
-            else if ( (cth_rise==true) && (cth_fall==false) && (chn[i] > (Vpeak*fraction) ))
+            else if ( (cth_rise==true) && (cth_fall==false) && (chnInterp[i] > (Vpeak*fraction) ))
             {
-                CTHWidth=t[i]-CTHtime;
+                CTHWidth=t[i/2]-CTHtime;
                 cth_fall=true;
             }
             
             //Find Fractional Threshold Cross Time & Pulse Width
-            if ( (fth_rise==false) && (chn[i] < (Vpeak*fraction) ))
+            if ( (fth_rise==false) && (chnInterp[i] < (Vpeak*fraction) ))
             {
-                FTHtime=t[i]; 
+                FTHtime=t[i/2]; 
                 fth_rise=true;
             }
-            else if ( (fth_rise==true) && (fth_fall==false) && (chn[i] > (Vpeak*fraction) ))
+            else if ( (fth_rise==true) && (fth_fall==false) && (chnInterp[i] > (Vpeak*fraction) ))
             {
-                FTHWidth=t[i]-FTHtime;
+                FTHWidth=t[i/2]-FTHtime;
                 fth_fall=true;
             }
         }
@@ -279,14 +279,9 @@ void unpack(char *filename)
 
 
 
-    rec->Draw("FTHFlightTime","(FTHFlightTime < 10 && FTHFlightTime > -10 && PeakVoltage0<-100)");
+    rec->Draw("FTHFlightTime","(FTHFlightTime < 10 && FTHFlightTime > -10 && PeakVoltage0<-200)");
     //rec->Draw("chn0:t>>h1");
     //*htemp = (TH2F*)gPad->GetPrimitive("htemp");
-
-
-
-
-
 
 /*
     Int_t nevent = rec->GetEntries(); //get number of events
