@@ -755,6 +755,7 @@ int Osci::SaveWaveforms(MXML_WRITER *xml, int fd)
 
       mxml_end_element(xml); // Event
    }
+
    if (fd) {
       p = buffer;
       memcpy(p, "EHDR", 4);
@@ -788,6 +789,7 @@ int Osci::SaveWaveforms(MXML_WRITER *xml, int fd)
          *(float *)p = t;
          p += sizeof(float);
       }
+
       for (int i=0 ; i<4 ; i++) {
          if (m_chnOn[i]) {
             sprintf((char *)p, "C%03d", i+1);
@@ -808,6 +810,7 @@ int Osci::SaveWaveforms(MXML_WRITER *xml, int fd)
             }
          }
       }
+
       int size = p-buffer;
       int n = write(fd, buffer, size);
       if (n != size)

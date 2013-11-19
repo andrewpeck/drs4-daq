@@ -21,7 +21,7 @@ else
 	LIBS          = -lpthread -lutil -lusb
 endif
 
-DRS4OBJ = $(OBJDIR)/DRS.o 
+DRS4OBJ = $(OBJDIR)/DRS.o
 OBJECTS = $(OBJDIR)/musbstd.o $(OBJDIR)/mxml.o $(OBJDIR)/strlcpy.o
 MAINOBJ	= $(OBJDIR)/drscl.o $(OBJDIR)/main.o
 ROOTOBJ = $(OBJDIR)/TEvent.o $(OBJDIR)/TEventDict.o
@@ -49,7 +49,7 @@ $(MAINOBJ): $(OBJDIR)/%.o: %.cpp %.h $(DRVDIR)/mxml.h $(DRVDIR)/DRS.h libs/TEven
 $(DRS4OBJ): $(OBJDIR)/%.o: $(DRVDIR)/%.cpp $(DRVDIR)/%.h $(DRVDIR)/mxml.h $(DRVDIR)/DRS.h
 	$(CXX) $(CFLAGS)  -c $< -o $@
 
-$(OBJECTS): $(OBJDIR)/%.o: $(DRVDIR)/%.c $(DRVDIR)/mxml.h $(DRVDIR)/DRS.h
+$(OBJECTS): $(OBJDIR)/%.o: $(DRVDIR)/%.c $(DRVDIR)/mxml.h $(DRVDIR)/DRS.h 
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 $(ROOTOBJ): $(OBJDIR)/%.o: libs/%.cpp

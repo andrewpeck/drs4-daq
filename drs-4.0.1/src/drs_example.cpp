@@ -61,8 +61,6 @@ int main()
    m_evSerial = 0;
 //
 
-
-
 	int i, j, nBoards;
 	DRS *drs;
 	DRSBoard *b;

@@ -1,3 +1,7 @@
+Requires:
+    libusb
+    libusb++-dev
+
 Usage: ./main [option]
 If no option is provided, the program will perform measurement with default settings: sampling rate 1 GHz, input range -0.5 - +0.5 V, software (forced) trigger, delay 0 ns, result will be written to output/test.root
 Available options are:

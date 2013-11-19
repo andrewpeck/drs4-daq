@@ -1,5 +1,6 @@
 #include "TEvent.h"
 ClassImp(TEvent);
+
 void TEvent::ShowWave(int ch)
 {
 	TH1D *h1 = new TH1D("h1","a pulse",1024,0,1023);
@@ -23,16 +24,11 @@ TEvent::TEvent()
 void TEvent::WriteWave(int chn,float *pwave)
 {
 	for (int i=0;i<1024;i++)
-	{
 		fpWaveArray[chn][i] = pwave[i];
-		//printf("%d\t: %f\t %f\n",i,fpWaveArray[chn][i],pwave[i]);
-	}
 }
+
 void TEvent::GetWave(int chn,float *pwave)
 {
 	for (int i=0;i<1024;i++)
-	{
 		pwave[i] = fpWaveArray[chn][i];
-		//printf("%d\t: %f\t %f\n",i,fpWaveArray[chn][i],pwave[i]);
-	}
 }
