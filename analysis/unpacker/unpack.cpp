@@ -55,6 +55,10 @@ struct Waveform_t {
 
 void unpack(char *filename) 
 {
+    gROOT->SetStyle("Plain");
+    gStyle->SetTitleBorderSize(0);
+    gStyle->SetPalette(1);
+
     Header_t header;
     Waveform_t waveform;
     Double_t t[1024];
@@ -98,7 +102,7 @@ void unpack(char *filename)
     //channel 0 branches
     rec->Branch("chn0", &chn0, "chn0[1024]/D");
     rec->Branch("Qint0", &Qint[0] ,"Qint0/D");
-    rec->Branch("VPeak0", &Vpeak[0],	"VPeak0/D");
+    rec->Branch("Vpeak0", &Vpeak[0],	"Vpeak0/D");
     rec->Branch("PeakBin0", &PeakBin[0],	"PeakBin0/I");
     rec->Branch("CTHtime0", &CTHtime[0],	"CTHtime0/D");
     rec->Branch("FTHtime0", &FTHtime[0],	"FTHtime0/D");
@@ -108,7 +112,7 @@ void unpack(char *filename)
     //channel 1 branches
     rec->Branch("chn1", &chn1,"chn1[1024]/D");
     rec->Branch("Qint1", &Qint[1] ,"Qint1/D");
-    rec->Branch("VPeak1", &Vpeak[1],	"VPeak1/D");
+    rec->Branch("Vpeak1", &Vpeak[1],	"Vpeak1/D");
     rec->Branch("PeakBin1", &PeakBin[1],	"PeakBin1/I");
     rec->Branch("CTHtime1", &CTHtime[1],	"CTHtime1/D");
     rec->Branch("FTHtime1", &FTHtime[1],	"FTHtime1/D");
@@ -180,11 +184,14 @@ void unpack(char *filename)
     cout<<n<<" events processed"<<endl;
     cout<<"\""<<Form("%s.root", filename)<<"\" written"<<endl;
 
-    //rec->Draw("chn0:t");
+    //rec->Draw("chn0:t","(FTHtime0<134)");
+    //rec->Draw("chn0:chn1");
+    //rec->Draw("FTHFlightTime:FTHtime0");
+    //rec->Draw("FTHFlightTime","(FTHtime0 < 132 && FTHtime1 < 132)");
+    //rec->Draw("FTHFlightTime:Vpeak1");
+    //rec->Draw("FTHFlightTime:Vpeak1-Vpeak0");
     //rec->Draw("FTHFlightTime");
-    rec->Draw("FTHFlightTime","(FTHFlightTime < 10 && FTHFlightTime > -10 && FTHtime0>100 && FTHtime1 > 100)");
-    //rec->Draw("FTHFlightTime");
-    //rec->Draw("CTHFlightTime","(CTHFlightTime < 10 && CTHFlightTime > -10 && VPeak0<-100)");
+    rec->Draw("FTHFlightTime","(FTHFlightTime < 10 && FTHFlightTime > -10 && Vpeak0<-100 && Vpeak1<-100)");
 
     //Write Tree
     rec->Write();

@@ -23,6 +23,7 @@
 #include "strlcpy.h"
 #include "DRS.h"
 
+//#include "pugixml.h"
 
 typedef struct {
     unsigned short Year;
@@ -278,3 +279,12 @@ int SaveWaveforms(int fd)
 
     return 1;
 }
+
+
+
+//int loadconfig()
+//{
+//pugi::xml_document doc;
+//    pugi::xml_parse_result result = doc.load_file("thunar.xml");
+//    std::cout << "Load result: " << result.description() << ", mesh name: " << doc.child("mesh").attribute("name").value() << std::endl;
+//}
