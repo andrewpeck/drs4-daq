@@ -28,10 +28,12 @@
 #else
 #   include <unistd.h>
 #   include <sys/time.h>
+
 inline void Sleep(useconds_t x)
 {
    usleep(x * 1000);
 }
+
 #endif
 
 #ifdef _MSC_VER

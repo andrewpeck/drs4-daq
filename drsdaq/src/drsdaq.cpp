@@ -4,26 +4,26 @@
 #include <fcntl.h>
 
 #if defined(OS_LINUX)
-
 #define O_BINARY 0
-
 #include <unistd.h>
 #include <ctype.h>
 #include <sys/ioctl.h>
 #include <errno.h>
-
 #define DIR_SEPARATOR '/'
-
 #endif
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 #include "strlcpy.h"
 #include "DRS.h"
+#include "rapidxml.hpp"
+#include <vector>
 
-//#include "pugixml.h"
+#include "iostream"
+
+using namespace rapidxml;
+using namespace std;
 
 typedef struct {
     unsigned short Year;
@@ -36,6 +36,7 @@ typedef struct {
 } TIMESTAMP;
 
 void GetTimeStamp(TIMESTAMP &ts);
+void ParseOptions(void);
 
 unsigned char buffer[100000];
 int SaveWaveforms(int fd);
@@ -49,10 +50,11 @@ float waveform[8][1024];
 int evSerial; 
 int numEvents=1000;
 int waveDepth=1024;
-bool chnOn[4];
 double center=0.0; //zero point
 double triglevel=-100; //trigger level (in mV)
+int trigsource=0;
 
+bool chnOn[4]={};
 
 /*------------------------------------------------------------------*/
 
@@ -68,10 +70,6 @@ int main( int argc, char *argv[] )
         return 0;
     }
 
-    chnOn[0]=1; //Channel 1 ON/OFF
-    chnOn[1]=1;
-    chnOn[2]=0;
-    chnOn[3]=0;
     int i, j, nBoards;
 
     /* do initial scan */
@@ -109,10 +107,22 @@ int main( int argc, char *argv[] )
 
     /* use following line to set range to 0..1V */
     //b->SetInputRange(0.5);
+    
+    ParseOptions();
 
+    cout << "Running with options: \n";
+    cout << "Trigger Level:"        << triglevel    << "\n";
+    cout << "Trigger Source:"       << trigsource   << "\n";
+    cout << "Zero-point:"           << center       << "\n";
+    cout << "Number of events:"     << numEvents    << "\n";
+    cout << "Channel 0 on/off:"     << chnOn[0]     << "\n";
+    cout << "Channel 1 on/off :"    << chnOn[1]     << "\n";
+    cout << "Channel 2 on/off :"    << chnOn[2]     << "\n";
+    cout << "Channel 3 on/off :"    << chnOn[3]     << "\n";
+                                
     //use following lines to enable hardware trigger 
     b->EnableTrigger(1, 0);           // enable hardware trigger
-    b->SetTriggerSource(3<<0);        // set CH3 as source
+    b->SetTriggerSource(trigsource<<0);        // set CH3 as source
     b->SetTriggerLevel(-0.20, false);     // trig level, rising or falling edge
     b->SetTriggerDelayNs(150);             // trigger delay
 
@@ -146,7 +156,7 @@ int main( int argc, char *argv[] )
 
         //Print some status
         if (j % 100 == 0)
-            printf("\rEvent #%d read successfully\n", j);
+            printf("\nEvent #%d read successfully\n", j);
         
     }
 
@@ -280,11 +290,29 @@ int SaveWaveforms(int fd)
     return 1;
 }
 
+void ParseOptions(void)
+{
+    xml_document<> doc; 
+    xml_node<> * root_node; 
+    ifstream ConfigFile ("config.xml");
+    vector<char> buffer((istreambuf_iterator<char>(ConfigFile)), istreambuf_iterator<char>());
+    buffer.push_back('\0');
 
+    // Parse the buffer using the xml file parsing library into doc 
+    doc.parse<0>(&buffer[0]);
 
-//int loadconfig()
-//{
-//pugi::xml_document doc;
-//    pugi::xml_parse_result result = doc.load_file("thunar.xml");
-//    std::cout << "Load result: " << result.description() << ", mesh name: " << doc.child("mesh").attribute("name").value() << std::endl;
-//}
+    // Find our root node
+    root_node = doc.first_node("DRS4Config");
+
+    for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); RunConfig; RunConfig = RunConfig->next_sibling())
+    {
+        triglevel=atof(RunConfig->first_attribute("triglevel")->value());
+        trigsource=atoi(RunConfig->first_attribute("trigsource")->value());
+        center=atoi(RunConfig->first_attribute("center")->value());
+        numEvents=atoi(RunConfig->first_attribute("numEvents")->value());
+        chnOn[0]=atoi(RunConfig->first_attribute("ChnOn0")->value());
+        chnOn[1]=atoi(RunConfig->first_attribute("ChnOn1")->value());
+        chnOn[2]=atoi(RunConfig->first_attribute("ChnOn2")->value());
+        chnOn[3]=atoi(RunConfig->first_attribute("ChnOn3")->value());
+    }
+}
