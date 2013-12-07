@@ -2,16 +2,12 @@
 #include <fstream>
 #include <unistd.h>
 #include <fcntl.h>
-
-#if defined(OS_LINUX)
 #define O_BINARY 0
 #include <unistd.h>
 #include <ctype.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #define DIR_SEPARATOR '/'
-#endif
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -19,8 +15,7 @@
 #include "DRS.h"
 #include "rapidxml.hpp"
 #include <vector>
-
-#include "iostream"
+#include <iostream>
 
 using namespace rapidxml;
 using namespace std;
@@ -45,16 +40,17 @@ DRS *drs;
 DRSBoard *b;
 TIMESTAMP evTimestamp;
 
-float time_array[1024];
-float waveform[8][1024];
-int evSerial; 
+int evSerial=0; //event number
+float time_array[1024]; //timebinarray
+float waveform[8][1024]; //8x1024 array (8 channels x 1024 samples)
 int numEvents=1000;
 int waveDepth=1024;
 double center=0.0; //zero point
 double triglevel=-100; //trigger level (in mV)
-int trigsource=0;
-
 bool chnOn[4]={};
+int trigsource=0;
+bool posneg=0; //1=rising edge 0=falling edge
+double freq=5; //sampling frequency
 
 /*------------------------------------------------------------------*/
 
@@ -64,8 +60,7 @@ int main( int argc, char *argv[] )
     filename=argv[1];
 
     //printf("filename %s",filename);
-    if (argc != 2)
-    {
+    if (argc != 2) {
         printf("Need to Specify Output Filename\n");
         return 0;
     }
@@ -78,7 +73,8 @@ int main( int argc, char *argv[] )
     /* show any found board(s) */
     for (i=0 ; i<drs->GetNumberOfBoards() ; i++) {
         b = drs->GetBoard(i);
-        printf("Found DRS4 evaluation board, serial #%d, firmware revision %d\n", 
+        printf("Found DRS4 evaluation board, \
+                serial #%d, firmware revision %d\n", 
                 b->GetBoardSerialNumber(), b->GetFirmwareVersion());
     }
 
@@ -97,67 +93,55 @@ int main( int argc, char *argv[] )
     b->Init();
 
     /* set sampling frequency */
-    b->SetFrequency(5, true);
+    b->SetFrequency(freq, true);
 
     /* enable transparent mode needed for analog trigger */
     b->SetTranspMode(1);
 
     //set input range center
     b->SetInputRange(0);
+    //b->SetInputRange(0.5); //to set input range to 0-1V
 
-    /* use following line to set range to 0..1V */
-    //b->SetInputRange(0.5);
-    
-    ParseOptions();
+    ParseOptions(); //parse XML config file for options
 
     cout << "Running with options: \n";
     cout << "Trigger Level:"        << triglevel    << "\n";
     cout << "Trigger Source:"       << trigsource   << "\n";
     cout << "Zero-point:"           << center       << "\n";
     cout << "Number of events:"     << numEvents    << "\n";
+    cout << "Sampling frequency:"   << freq <<"GHz" << "\n";
     cout << "Channel 0 on/off:"     << chnOn[0]     << "\n";
     cout << "Channel 1 on/off :"    << chnOn[1]     << "\n";
     cout << "Channel 2 on/off :"    << chnOn[2]     << "\n";
     cout << "Channel 3 on/off :"    << chnOn[3]     << "\n";
-                                
+
     //use following lines to enable hardware trigger 
-    b->EnableTrigger(1, 0);           // enable hardware trigger
-    b->SetTriggerSource(trigsource<<0);        // set CH3 as source
-    b->SetTriggerLevel(-0.20, false);     // trig level, rising or falling edge
-    b->SetTriggerDelayNs(150);             // trigger delay
+    b->EnableTrigger(1, 0);             // enable hardware trigger
+    b->SetTriggerSource(1<<trigsource); // set trigger source
+    //0=ch0 1=ch1 2=ch2 3=ch3 4=EXT
+    b->SetTriggerLevel(-0.20, posneg);  // trig level, edge
+    b->SetTriggerDelayNs(150);          // trigger delay
 
+    //open output file
+    int WFfd;
+    WFfd = open(filename, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, 0644);
 
-    /* use following lines to enable the external trigger */
-    //if (b->GetBoardType() == 8) {     // Evaluaiton Board V4
-    //   b->EnableTrigger(1, 0);           // enable hardware trigger
-    //   b->SetTriggerSource(1<<4);        // set external trigger as source
-    //} else {                          // Evaluation Board V3
-    //   b->EnableTrigger(1, 0);           // lemo on, analog trigger off
-    // }
-
-
-        //open output file
-        int WFfd;
-        WFfd = open(filename, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, 0644);
-    
     //Collect Events
     for (j=0 ; j<numEvents ; j++) {
 
         /* start board (activate domino wave) */
         b->StartDomino();
 
-
         /* wait for trigger */
         while (b->IsBusy());
 
-        
         //Save Waveforms
+        evSerial=j;
         SaveWaveforms(WFfd); 
 
         //Print some status
         if (j % 100 == 0)
             printf("\nEvent #%d read successfully\n", j);
-        
     }
 
     //Close Waveform File
@@ -169,21 +153,6 @@ int main( int argc, char *argv[] )
 
 void GetTimeStamp(TIMESTAMP &ts)
 {
-#ifdef _MSC_VER
-    SYSTEMTIME t;
-    static unsigned int ofs = 0;
-
-    GetLocalTime(&t);
-    if (ofs == 0)
-        ofs = timeGetTime() - t.wMilliseconds;
-    ts.Year         = t.wYear;
-    ts.Month        = t.wMonth;
-    ts.Day          = t.wDay;
-    ts.Hour         = t.wHour;
-    ts.Minute       = t.wMinute;
-    ts.Second       = t.wSecond;
-    ts.Milliseconds = (timeGetTime() - ofs) % 1000;
-#else
     struct timeval t;
     struct tm *lt;
     time_t now;
@@ -199,7 +168,6 @@ void GetTimeStamp(TIMESTAMP &ts)
     ts.Minute       = lt->tm_min;
     ts.Second       = lt->tm_sec;
     ts.Milliseconds = t.tv_usec/1000;
-#endif /* OS_UNIX */
 }
 
 int SaveWaveforms(int fd)
@@ -211,7 +179,7 @@ int SaveWaveforms(int fd)
 
     if (fd == 0)
         return 0;
-    
+
     GetTimeStamp(evTimestamp); 
 
     p = buffer;
@@ -237,44 +205,41 @@ int SaveWaveforms(int fd)
     p += sizeof(unsigned short);
 
     b->GetTime(0, b->GetTriggerCell(0), time_array);
-    for (int j=0 ; j<waveDepth ; j++) 
-    {
+
+    for (int j=0 ; j<waveDepth ; j++) {
         // save binary time as 32-bit float value
-        if (waveDepth == 2048) 
-        {
+        if (waveDepth == 2048) {
             t = (time_array[j]+time_array[j+1])/2;
             j++;
         } 
 
         else
             t = time_array[j];
+
         *(float *)p = t;
         p += sizeof(float);
     }
 
     b->TransferWaves(0, 8);
-    for (int i=0 ; i<4 ; i++) 
-    {
-        if (chnOn[i]) 
-        {
+    for (int i=0 ; i<4 ; i++) {
+        if (chnOn[i]) {
             b->GetWave(0, i*2, waveform[i]);
-
             sprintf((char *)p, "C%03d", i+1);
             p += 4;
-            for (int j=0 ; j<waveDepth ; j++)
-            {
+
+            for (int j=0 ; j<waveDepth ; j++) {
                 // save binary date as 16-bit value: 0 = -0.5V, 65535 = +0.5V
-                if (waveDepth == 2048) 
-                {
-                    // in cascaded mode, save 1024 values as averages of the 2048 values
-                    d = (unsigned short)(((waveform[i][j]+waveform[i][j+1])/2000.0 + 0.5) * 65535);
+                if (waveDepth == 2048) {
+                    // in cascaded mode, save 1024 values 
+                    // as averages of the 2048 values
+                    d = (unsigned short)(((waveform[i][j]+waveform[i][j+1]) \
+                         /2000.0+0.5)*65535);
                     *(unsigned short *)p = d;
                     p += sizeof(unsigned short);
                     j++;
                 } 
-                else 
-                {
-                    d = (unsigned short)((waveform[i][j]/1000.0 + 0.5) * 65535);
+                else {
+                    d = (unsigned short)((waveform[i][j]/1000.0+0.5)*65535);
                     *(unsigned short *)p = d;
                     p += sizeof(unsigned short);
                 }
@@ -290,12 +255,13 @@ int SaveWaveforms(int fd)
     return 1;
 }
 
-void ParseOptions(void)
+void ParseOptions(void) //Reads XML config file config.xml
 {
     xml_document<> doc; 
     xml_node<> * root_node; 
     ifstream ConfigFile ("config.xml");
-    vector<char> buffer((istreambuf_iterator<char>(ConfigFile)), istreambuf_iterator<char>());
+    vector<char> buffer((istreambuf_iterator<char>(ConfigFile)), 
+            istreambuf_iterator<char>());
     buffer.push_back('\0');
 
     // Parse the buffer using the xml file parsing library into doc 
@@ -304,12 +270,15 @@ void ParseOptions(void)
     // Find our root node
     root_node = doc.first_node("DRS4Config");
 
-    for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); RunConfig; RunConfig = RunConfig->next_sibling())
-    {
+    for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); 
+            RunConfig; RunConfig = RunConfig->next_sibling()) {
+
         triglevel=atof(RunConfig->first_attribute("triglevel")->value());
         trigsource=atoi(RunConfig->first_attribute("trigsource")->value());
         center=atoi(RunConfig->first_attribute("center")->value());
         numEvents=atoi(RunConfig->first_attribute("numEvents")->value());
+        freq=atof(RunConfig->first_attribute("freq")->value());
+        posneg=atoi(RunConfig->first_attribute("posneg")->value());
         chnOn[0]=atoi(RunConfig->first_attribute("ChnOn0")->value());
         chnOn[1]=atoi(RunConfig->first_attribute("ChnOn1")->value());
         chnOn[2]=atoi(RunConfig->first_attribute("ChnOn2")->value());
