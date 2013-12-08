@@ -20,7 +20,7 @@
 using namespace std; 
 
 double fraction=0.5;  //fractional threshold
-double Vthresh=-30;  //fixed threshold
+double Vthresh=0;  //fixed threshold
 
 void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], 
                     double &Vpeak, int &PeakBin);
@@ -127,6 +127,8 @@ void unpack(char *filename) {
 
     // loop over all events in data file
     for (n=0 ; fread(&header, sizeof(header), 1, f) > 0; n++) {
+
+        //extract event number
         eventNum=header.serial_number;
 
         // decode time      
@@ -143,6 +145,7 @@ void unpack(char *filename) {
         tm.tm_sec = (header.second + header.millisecond * 1000);
         EventDate = std::mktime(&tm);
 
+        //some progress notification
         if (n%1000==0)
             cout << "Processing event " << n << "\n";
 
@@ -158,9 +161,9 @@ void unpack(char *filename) {
         DecodeWaveform(waveform.chn0, chn0, Vpeak[0], PeakBin[0]);
         DecodeWaveform(waveform.chn1, chn1, Vpeak[1], PeakBin[1]);
 
-        //if Vthresh undefined, define as avg of first two pulses
+        //if Vthresh undefined, define as 1/2 avg of first two pulses
         if (Vthresh==0)
-            Vthresh=0.5*(Vpeak[0]+Vpeak[1])/2.0;
+            Vthresh=0.25*(Vpeak[0]+Vpeak[1]);
 
         //Measure PulseTime (Fractional and Constant Threshold Time)
         PulseTime(chn0, t, CTHtime[0], FTHtime[0], CTHWidth[0], 
@@ -172,7 +175,7 @@ void unpack(char *filename) {
         IntegrateCharge(chn0, PeakBin[0], Qint[0]);
         IntegrateCharge(chn1, PeakBin[1], Qint[1]);
 
-        //Calculate deltaT
+        //Calculate time-of-flight
         CTHFlightTime=(CTHtime[1]-CTHtime[0]);
         FTHFlightTime=(FTHtime[1]-FTHtime[0]);
 
@@ -191,6 +194,7 @@ void unpack(char *filename) {
     //Close ROOTfile
     outfile->Close();
 
+    //make some extra plots
     MakePlots(filename);
 }
 
@@ -207,18 +211,15 @@ void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[],
             WaveOut[i]=0;
 
         //Simple Peak Finding
-        if (WaveOut[i] < Vpeak) 
-        {
+        if (WaveOut[i] < Vpeak) {
             Vpeak=WaveOut[i]; 
             PeakBin=i;
         }
-
     }
 }
 
 void InterpolateWaveform(Double_t ArrA[], Double_t ArrB[]) {
-    for (int i=0; i<2048; i++)
-    {
+    for (int i=0; i<2048; i++) {
         if (i%2==0)
             ArrB[i]=ArrA[i/2];
         else 
@@ -250,10 +251,8 @@ void PulseTime(Double_t chn[], Double_t t[], double& CTHtime,
                double& FTHtime, double& CTHWidth, double& FTHWidth,
                double Vpeak, int PeakBin) {
 
-    bool fth_rise=false;
-    bool fth_fall=false;
-    bool cth_rise=false;
-    bool cth_fall=false;
+    bool fth_rise, fth_fall, cth_rise, cth_fall;
+    fth_rise=fth_fall=cth_rise=cth_fall=false;
     double chnInterp[2048];
 
     InterpolateWaveform(chn,chnInterp);
@@ -262,8 +261,8 @@ void PulseTime(Double_t chn[], Double_t t[], double& CTHtime,
 
     for (Int_t i=20; i<2028; i++)  //discard first and last 10 time bins
     {
-        if ((i>2*(PeakBin-30)) && (i<2*(PeakBin+30)))
-        {
+        if ((i>2*(PeakBin-30)) && (i<2*(PeakBin+30))) {
+            
             //Find Constant Threshold Cross Time 
             if ( (cth_rise==false) && (chnInterp[i] < Vthresh) ) {
                 CTHtime=t[i/2]+t[i%2]/2;

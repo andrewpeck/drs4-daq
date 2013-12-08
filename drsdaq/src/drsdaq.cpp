@@ -16,6 +16,7 @@
 #include "rapidxml.hpp"
 #include <vector>
 #include <iostream>
+#include "progressbar.h"
 
 using namespace rapidxml;
 using namespace std;
@@ -35,6 +36,8 @@ void ParseOptions(void);
 
 unsigned char buffer[100000];
 int SaveWaveforms(int fd);
+int calibrate();
+int init();
 
 DRS *drs;
 DRSBoard *b;
@@ -56,14 +59,18 @@ double freq=5; //sampling frequency
 
 int main( int argc, char *argv[] )
 {
-    const char* filename="default.dat";
-    filename=argv[1];
+    //calibrate board
+    if (strcomp(argv[1],"calibrate")==0)
+        calibrate();
 
-    //printf("filename %s",filename);
+    //filename = argument1 
+    const char* filename;
+    filename=argv[1];
     if (argc != 2) {
         printf("Need to Specify Output Filename\n");
         return 0;
     }
+
 
     int i, j, nBoards;
 
@@ -80,30 +87,18 @@ int main( int argc, char *argv[] )
 
     /* exit if no board found */
     nBoards = drs->GetNumberOfBoards();
-    if (nBoards == 0) 
-    {
+    if (nBoards == 0) {
         printf("No DRS4 evaluation board found\n");
         return 0;
     }
 
-    /* continue working with first board only */
-    b = drs->GetBoard(0);
+    //initialize board
+    init();
 
-    /* initialize board */
-    b->Init();
+    //parse XML config file for options
+    ParseOptions(); 
 
-    /* set sampling frequency */
-    b->SetFrequency(freq, true);
-
-    /* enable transparent mode needed for analog trigger */
-    b->SetTranspMode(1);
-
-    //set input range center
-    b->SetInputRange(0);
-    //b->SetInputRange(0.5); //to set input range to 0-1V
-
-    ParseOptions(); //parse XML config file for options
-
+    //print options for current run
     cout << "Running with options: \n";
     cout << "Trigger Level:"        << triglevel    << "\n";
     cout << "Trigger Source:"       << trigsource   << "\n";
@@ -119,6 +114,10 @@ int main( int argc, char *argv[] )
     b->EnableTrigger(1, 0);             // enable hardware trigger
     b->SetTriggerSource(1<<trigsource); // set trigger source
     //0=ch0 1=ch1 2=ch2 3=ch3 4=EXT
+    //DATA WORD SPECIFIES TRIGGERING INFORMATION
+    //0000=CH0; 0001=CH1 ETC.
+    //0011=CH0+CH1
+    //
     b->SetTriggerLevel(-0.20, posneg);  // trig level, edge
     b->SetTriggerDelayNs(150);          // trigger delay
 
@@ -284,4 +283,76 @@ void ParseOptions(void) //Reads XML config file config.xml
         chnOn[2]=atoi(RunConfig->first_attribute("ChnOn2")->value());
         chnOn[3]=atoi(RunConfig->first_attribute("ChnOn3")->value());
     }
+}
+
+
+int calibrate()
+{
+    ProgressBar p;
+
+    char line[80];
+    float freq,range;
+
+    //Initialize DRS4 board
+    init();
+
+    printf("\nEnter calibration frequency [GHz]: ");
+    fgets(line, sizeof(line), stdin);
+    freq = atof(line);
+    printf("freq: %f\n",freq);
+    b->SetFrequency(freq, true);
+    cout << "\tVoltage calibration at "<<freq<< " GHz\n";
+
+    printf("Enter center of voltage range [V]: ");
+    fgets(line, sizeof(line), stdin);
+    range = atof(line);
+    b->SetInputRange(range);
+    cout <<"\tRange: "<<center-0.5<<" V - "<<center+0.5<<"V\n";
+
+    //printf("Enter mode [1]024 or [2]048 bin mode: ");
+    //fgets(line, sizeof(line), stdin);
+    //int cascading;
+    //cascading = atoi(line);
+    //if (cascading == 2)
+    b->SetChannelConfig(0, 8, 4);
+    //else
+    //	b->SetChannelConfig(0, 8, 8);
+
+    printf("\nPlease make sure that no input signal are present then hit any key\r");
+    fflush(stdout);
+    while (!kbhit());
+    printf("                                                                  \r");
+    while (kbhit())
+        getchar();
+
+    if (b->GetTransport() == TR_VME)
+        printf("Creating Calibration of Board in VME slot %2d %s, serial #%04d\n",  
+                (b->GetSlotNumber() >> 1)+2, ((b->GetSlotNumber() & 1) == 0) ? "upper" : "lower", 
+                b->GetBoardSerialNumber());
+    else
+        printf("Creating Calibration of Board on USB, serial #%04d\n",  
+                b->GetBoardSerialNumber());
+
+    b->SoftTrigger();
+    b->CalibrateVolt(&p);
+    printf("\nDone! \n");
+
+    cout <<"Calibration finished\n";
+    return 0;
+}
+
+
+int init()
+{
+    /* continue working with first board only */
+    b = drs->GetBoard(0);
+    /* initialize board */
+    b->Init();
+    /* enable transparent mode needed for analog trigger */
+    b->SetTranspMode(1);
+    /* set input range to -0.5V ... +0.5V - default*/
+    b->SetInputRange(center);
+    /* use following line to set range to 0..1V */
+    //b->SetInputRange(0.5);
+    return 1;
 }
