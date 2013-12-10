@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DRS4Config>
     <RunConfig 
-        triglevel="-50.0" 
-        trigsource="3"
+        triglevel="-0.02" 
+        trigsource="7"
         center="0" 
         freq="5"
         numEvents="25000"

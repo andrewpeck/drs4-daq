@@ -49,7 +49,7 @@ float waveform[8][1024]; //8x1024 array (8 channels x 1024 samples)
 int numEvents=1000;
 int waveDepth=1024;
 double center=0.0; //zero point
-double triglevel=-100; //trigger level (in mV)
+double triglevel=-0.02; //trigger level (in VOLTS)
 bool chnOn[4]={};
 int trigsource=0;
 bool posneg=false; //1=rising edge 0=falling edge
@@ -114,7 +114,9 @@ int main( int argc, char *argv[] )
 
     //use following lines to enable hardware trigger 
     b->EnableTrigger(1, 0);             // enable hardware trigger
-    b->SetTriggerSource(7); 
+    b->SetTriggerSource(7);
+    b->SetTriggerLevel(-0.05, false);  // trig level, edge
+    b->SetTriggerDelayNs(0);          // trigger delay
 
     /* NOTE: 
      * SetTriggerSource accepts an INT
@@ -131,15 +133,14 @@ int main( int argc, char *argv[] )
      *
      */
 
-    b->SetTriggerLevel(-0.15, false);  // trig level, edge
-    b->SetTriggerDelayNs(150);          // trigger delay
 
     //open output file
     int WFfd;
     WFfd = open(filename, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, 0644);
 
+
     //Collect Events
-    for (j=0 ; j<numEvents ; j++) {
+    for (int j=0 ; j<numEvents ; j++) {
 
         /* start board (activate domino wave) */
         b->StartDomino();
@@ -152,7 +153,7 @@ int main( int argc, char *argv[] )
         SaveWaveforms(WFfd); 
 
         //Print some status
-        if (j % 1 == 0)
+        //if (j % 100 == 0)
             printf("\nEvent #%d read successfully\n", j);
     }
 
@@ -282,7 +283,6 @@ void ParseOptions(void) //Reads XML config file config.xml
     // Find our root node
     root_node = doc.first_node("DRS4Config");
 
-    printf("HERE1\n");
     for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); RunConfig; RunConfig = RunConfig->next_sibling()) {
         triglevel=atof(RunConfig->first_attribute("triglevel")->value());
         trigsource=atoi(RunConfig->first_attribute("trigsource")->value());
