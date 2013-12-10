@@ -95,8 +95,10 @@ int main( int argc, char *argv[] )
     //initialize board
     init();
 
+
     //parse XML config file for options
     ParseOptions(); 
+
 
     //print options for current run
     cout << "Running with options: \n";
@@ -269,19 +271,18 @@ void ParseOptions(void) //Reads XML config file config.xml
     // Find our root node
     root_node = doc.first_node("DRS4Config");
 
-    for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); 
-            RunConfig; RunConfig = RunConfig->next_sibling()) {
-
+    printf("HERE1\n");
+    for (xml_node<> * RunConfig = root_node->first_node("RunConfig"); RunConfig; RunConfig = RunConfig->next_sibling()) {
         triglevel=atof(RunConfig->first_attribute("triglevel")->value());
         trigsource=atoi(RunConfig->first_attribute("trigsource")->value());
         center=atoi(RunConfig->first_attribute("center")->value());
         numEvents=atoi(RunConfig->first_attribute("numEvents")->value());
         freq=atof(RunConfig->first_attribute("freq")->value());
         posneg=atoi(RunConfig->first_attribute("posneg")->value());
-        chnOn[0]=atoi(RunConfig->first_attribute("ChnOn0")->value());
-        chnOn[1]=atoi(RunConfig->first_attribute("ChnOn1")->value());
-        chnOn[2]=atoi(RunConfig->first_attribute("ChnOn2")->value());
-        chnOn[3]=atoi(RunConfig->first_attribute("ChnOn3")->value());
+        chnOn[0]=atoi(RunConfig->first_attribute("chnOn0")->value());
+        chnOn[1]=atoi(RunConfig->first_attribute("chnOn1")->value());
+        chnOn[2]=atoi(RunConfig->first_attribute("chnOn2")->value());
+        chnOn[3]=atoi(RunConfig->first_attribute("chnOn3")->value());
     }
 }
 
