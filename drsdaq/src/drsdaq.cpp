@@ -52,7 +52,7 @@ double center=0.0; //zero point
 double triglevel=-100; //trigger level (in mV)
 bool chnOn[4]={};
 int trigsource=0;
-bool posneg=0; //1=rising edge 0=falling edge
+bool posneg=false; //1=rising edge 0=falling edge
 double freq=5; //sampling frequency
 
 /*------------------------------------------------------------------*/
@@ -114,13 +114,13 @@ int main( int argc, char *argv[] )
 
     //use following lines to enable hardware trigger 
     b->EnableTrigger(1, 0);             // enable hardware trigger
-    b->SetTriggerSource(1<<trigsource); // set trigger source
-    //0=ch0 1=ch1 2=ch2 3=ch3 4=EXT
+    b->SetTriggerSource(2); // 
+    //1=ch0
     //DATA WORD SPECIFIES TRIGGERING INFORMATION
     //0000=CH0; 0001=CH1 ETC.
     //0011=CH0+CH1
     //
-    b->SetTriggerLevel(-0.20, posneg);  // trig level, edge
+    b->SetTriggerLevel(-0.2, false);  // trig level, edge
     b->SetTriggerDelayNs(150);          // trigger delay
 
     //open output file

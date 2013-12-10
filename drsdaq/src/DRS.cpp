@@ -3204,8 +3204,7 @@ int DRSBoard::DecodeWave(unsigned int chipIndex, unsigned char channel, unsigned
 
 /*------------------------------------------------------------------*/
 
-int DRSBoard::DecodeWave(unsigned char *waveforms, unsigned int chipIndex, unsigned char channel,
-                         unsigned short *waveform)
+int DRSBoard::DecodeWave(unsigned char *waveforms, unsigned int chipIndex, unsigned char channel, unsigned short *waveform)
 {
    // Get waveform
    int i, offset=0, ind, n_bins;
