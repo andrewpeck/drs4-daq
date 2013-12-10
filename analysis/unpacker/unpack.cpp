@@ -15,19 +15,18 @@
 #include <TH1.h>
 #include <TCanvas.h>
 #include <TStyle.h>
-#include <TProfile.h> #include <TChain.h>
+#include <TProfile.h> 
+#include <TChain.h>
 
 using namespace std; 
 
 double fraction=0.5;  //fractional threshold
 double Vthresh=0;  //fixed threshold
 
-void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], 
-                    double &Vpeak, int &PeakBin);
+void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], double &Vpeak, int &PeakBin);
 void InterpolateWaveform(Double_t ArrA[], Double_t ArrB[]);
 void IntegrateCharge(Double_t chn[], int PeakBin, double& Qint);
-void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime,
-                double& CTHWidth, double& FTHWidth, double Vpeak, int PeakBin);
+void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, double& CTHWidth, double& FTHWidth, double Vpeak, int PeakBin);
 void MakePlots(char* filename);
 
 struct Header_t {
@@ -166,10 +165,8 @@ void unpack(char *filename) {
             Vthresh=0.25*(Vpeak[0]+Vpeak[1]);
 
         //Measure PulseTime (Fractional and Constant Threshold Time)
-        PulseTime(chn0, t, CTHtime[0], FTHtime[0], CTHWidth[0], 
-                  FTHWidth[0], Vpeak[0], PeakBin[0]);
-        PulseTime(chn1, t, CTHtime[1], FTHtime[1], CTHWidth[1], 
-                  FTHWidth[1], Vpeak[1], PeakBin[1]);
+        PulseTime(chn0, t, CTHtime[0], FTHtime[0], CTHWidth[0], FTHWidth[0], Vpeak[0], PeakBin[0]);
+        PulseTime(chn1, t, CTHtime[1], FTHtime[1], CTHWidth[1], FTHWidth[1], Vpeak[1], PeakBin[1]);
 
         //Integrate Charge, Find Pedestal
         IntegrateCharge(chn0, PeakBin[0], Qint[0]);
@@ -198,8 +195,7 @@ void unpack(char *filename) {
     MakePlots(filename);
 }
 
-void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], 
-                    double &Vpeak, int &PeakBin) {
+void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], double &Vpeak, int &PeakBin) {
     for (Int_t i=0; i<1024; i++) 
     {
         // decode amplitudes in mV and find Peak Voltage
@@ -247,9 +243,7 @@ void IntegrateCharge(Double_t chn[], int PeakBin, double& Qint) {
     Qint=(Qint-Qped*m);
 }
 
-void PulseTime(Double_t chn[], Double_t t[], double& CTHtime,
-               double& FTHtime, double& CTHWidth, double& FTHWidth,
-               double Vpeak, int PeakBin) {
+void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, double& CTHWidth, double& FTHWidth, double Vpeak, int PeakBin) {
 
     bool fth_rise, fth_fall, cth_rise, cth_fall;
     fth_rise=fth_fall=cth_rise=cth_fall=false;
@@ -305,13 +299,11 @@ void MakePlots(char* filename) {
     rec->Draw("FTHFlightTime>>h1","(Vpeak0<-10 && Vpeak1<-10)");
     h1->Fit("gaus");
 
-    TH1F *h2 = new TH1F("h2","Constant Threshold Flighttime (Vpeak<-10)", \
-                        101,-5,5);
+    TH1F *h2 = new TH1F("h2","Constant Threshold Flighttime (Vpeak<-10)",101,-5,5);
     h2->GetXaxis()->SetTitle("time (ns)");
     rec->Draw("CTHFlightTime>>h2","(Vpeak0<-10 && Vpeak1<-10)");
 
-    TH1F *h3 = new TH1F("h3","Fractional Threshold Flighttime (Vpeak<-100)",\
-                        101,-5,5);
+    TH1F *h3 = new TH1F("h3","Fractional Threshold Flighttime (Vpeak<-100)",101,-5,5);
     h3->GetXaxis()->SetTitle("time (ns)");
     rec->Draw("FTHFlightTime>>h3","(Vpeak0<-100 && Vpeak1<-100)");
 
@@ -325,8 +317,7 @@ void MakePlots(char* filename) {
     h5->GetYaxis()->SetTitle("Voltage (mv)");
     rec->Draw("chn1:t>>h5","(Vpeak0<0 && Vpeak1<0)");
 
-    TProfile *hprof = new TProfile("hprof", "Flight time dependence on 
-                                    peak voltage",100,0,400,0,100);
+    TProfile *hprof = new TProfile("hprof", "Flight time dependence on peak voltage",100,0,400,0,100);
     hprof->GetXaxis()->SetTitle("Peak Voltage (-mV)");
     hprof->GetYaxis()->SetTitle("abs(Flight Time) (ns)");
     rec->Draw("abs(FTHFlightTime):abs(0.5*(Vpeak1+Vpeak0))>>hprof",
