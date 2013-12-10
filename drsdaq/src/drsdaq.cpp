@@ -114,13 +114,24 @@ int main( int argc, char *argv[] )
 
     //use following lines to enable hardware trigger 
     b->EnableTrigger(1, 0);             // enable hardware trigger
-    b->SetTriggerSource(2); // 
-    //1=ch0
-    //DATA WORD SPECIFIES TRIGGERING INFORMATION
-    //0000=CH0; 0001=CH1 ETC.
-    //0011=CH0+CH1
-    //
-    b->SetTriggerLevel(-0.2, false);  // trig level, edge
+    b->SetTriggerSource(7); 
+
+    /* NOTE: 
+     * SetTriggerSource accepts an INT
+     * 1 = 1<<0 = 0001 = CHN1
+     * 2 = 1<<1 = 0010 = CHN2
+     * 4 = 1<<2 = 0100 = CHN3
+     * 8 = 1<<3 = 1000 = CHN4
+     * 
+     * 5 = 1<<30101 = CHN3+1
+     * 6 = 0110 = CHN2+3
+     * 7 = 0111 = CHN1+2+3
+     *
+     * etc.
+     *
+     */
+
+    b->SetTriggerLevel(-0.15, false);  // trig level, edge
     b->SetTriggerDelayNs(150);          // trigger delay
 
     //open output file
@@ -141,7 +152,7 @@ int main( int argc, char *argv[] )
         SaveWaveforms(WFfd); 
 
         //Print some status
-        if (j % 100 == 0)
+        if (j % 1 == 0)
             printf("\nEvent #%d read successfully\n", j);
     }
 
