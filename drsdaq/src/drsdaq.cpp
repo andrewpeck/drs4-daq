@@ -60,7 +60,7 @@ double freq=5; //sampling frequency
 int main( int argc, char *argv[] )
 {
     //calibrate board
-    if (strcomp(argv[1],"calibrate")==0)
+    if (strcmp(argv[1],"calibrate")==0)
         calibrate();
 
     //filename = argument1 
