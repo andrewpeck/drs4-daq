@@ -1,11 +1,15 @@
-//System Headers
+//------------------------------------------------------------------------------
+// System Headers
+//------------------------------------------------------------------------------
 #include <string.h>
 #include <stdio.h>
 #include <TString.h>
 #include <iostream>
 #include <ctime>
 
-// ROOT Headers
+//------------------------------------------------------------------------------
+// Root Headers
+//------------------------------------------------------------------------------
 #include <TROOT.h>
 #include <TTree.h>
 #include <TBranch.h>
@@ -21,8 +25,9 @@
 
 using namespace std; 
 
-double fraction=0.5;  //fractional threshold
-double Vthresh=-50;  //fixed threshold
+//------------------------------------------------------------------------------
+// Prototypes
+//------------------------------------------------------------------------------
 
 void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], double &Vpeak, int &PeakBin);
 void InterpolateWaveform(Double_t ArrA[], Double_t ArrB[]);
@@ -30,8 +35,18 @@ void IntegrateCharge(Double_t chn[], int PeakBin, double& Qint);
 void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, double& CTHWidth, double& FTHWidth, double Vpeak, int PeakBin);
 void MakePlots(char* filename);
 
-#define NCHN 2
+//------------------------------------------------------------------------------
+// Constants
+//------------------------------------------------------------------------------
 
+double fraction=0.3;    //constant-fraction threshold
+double Vthresh=-25;     //constant-value threshold (in mV)
+#define NCHN 2
+#define LEADINGEDGEFIT 0
+
+//------------------------------------------------------------------------------
+//  Header_t struct stores event headers
+//------------------------------------------------------------------------------
 struct Header_t {
     char           event_header[4];
     unsigned int   serial_number;
@@ -46,6 +61,9 @@ struct Header_t {
     float time[1024];
 };
 
+//------------------------------------------------------------------------------
+//  Waveform_t struct holds data for 1 event on four channels
+//------------------------------------------------------------------------------
 struct Waveform_t {
 #if NCHN>0
     char           chn0_header[4];
@@ -65,6 +83,18 @@ struct Waveform_t {
 #endif
 };
 
+//------------------------------------------------------------------------------
+// Unpack :: Unpacks raw drs data into ROOT trees with variables: 
+// t        :: time bins
+// chn      :: voltage measurement 
+// Qint     :: pulse integrated charge
+// Vpeak    :: peak voltage
+// PeakBin  :: sample bin where peak voltage was recorded
+// CTHtime  :: constant-value threshold cross time
+// FTHtime  :: constant-fraction threshold cross time
+// CTHWidth :: constant-value threshold pulse width
+// FTHWidth :: constant-fraction threshold pulse width
+//------------------------------------------------------------------------------
 int unpack(char *filename) {
 
     gROOT->SetStyle("Plain");
@@ -119,9 +149,10 @@ int unpack(char *filename) {
         cout << "File opened\n";
     }
 
+    //open tfile
     TFile *outfile = new TFile(Form("%s.root", filename), "RECREATE");
 
-    // plant tree
+    // tree
     TTree *rec = new TTree("rec","rec");
 
     //event branches
@@ -185,15 +216,14 @@ int unpack(char *filename) {
     // loop over all events in data file
     Int_t n; 
     for (n=0; fread(&header, sizeof(header), 1, f) > 0; n++) {
-
         //extract event number
         eventNum=header.serial_number;
 
-        // decode time      
+        // unpack timestamp
         for (Int_t i=0; i<1024; i++)
             t[i] = (Double_t) header.time[i];
 
-        //fill time struct with date
+        //  decode timestamp and fill time structure
         std::tm tm; 
         tm.tm_year = header.year-1900;
         tm.tm_mon  = header.month-1;
@@ -205,7 +235,7 @@ int unpack(char *filename) {
 
         //some progress notification
         if (n%1000==0)
-            cout << "Processing event " << n << "\n";
+            printf("\n Processing event %i", n);
 
         //write zeroes 
         memset(Qint, 0, sizeof(Qint));
@@ -235,6 +265,14 @@ int unpack(char *filename) {
         //if Vthresh undefined, define as 1/2 avg of first two pulses
         if (Vthresh==0)
             Vthresh=0.25*(Vpeak[0]+Vpeak[1]);
+
+        /* 
+           Double_t CellAvg;
+           for (int i=0; i<1024; i++){
+           CellAvg = 0.25*(chn0[i]+chn1[i]+chn2[i]+chn3[i]);
+
+           }
+           */
 
         //Measure PulseTime (Fractional and Constant Threshold Time)
 #if NCHN > 0
@@ -270,7 +308,6 @@ int unpack(char *filename) {
         IntegrateCharge(chn3, PeakBin[3], Qint[3]);
 #endif 
 
-
         //Calculate time-of-flight
         CTHFlightTime=(CTHtime[1]-CTHtime[0]);
         FTHFlightTime=(FTHtime[1]-FTHtime[0]);
@@ -281,11 +318,11 @@ int unpack(char *filename) {
 
     // print number of events
 
-    cout<<n<<" events processed"<<endl;
+    printf("\n %i events processed", n);
     cout<<"\""<<Form("%s.root", filename)<<"\" written"<<endl;
 
     //Write Tree
-    rec->Write();
+    //rec->Write();
 
     //Close ROOTfile
     outfile->Close();
@@ -295,11 +332,15 @@ int unpack(char *filename) {
     return 0;
 }
 
+//------------------------------------------------------------------------------
+// DecodeWaveform :: translate 16 bit DAC count into voltage measurement
+//------------------------------------------------------------------------------
 void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], double &Vpeak, int &PeakBin) {
     for (Int_t i=0; i<1024; i++) 
     {
         // decode amplitudes in mV and find Peak Voltage
         // Values from 0-65535 are 16-Bit DAC counts, measured from 0-1V
+        // centered at 0V
         WaveOut[i] = (Double_t) ((WaveIn[i]) / 65535. - 0.5) * 1000;   
 
         //first and last time samples are noisy---discard them
@@ -314,6 +355,10 @@ void DecodeWaveform(unsigned short WaveIn[], Double_t WaveOut[], double &Vpeak, 
     }
 }
 
+//------------------------------------------------------------------------------
+// InterpolateWaveform :: point-to-point interpolation of 1024 entry array into 
+// 2048 entry array. 
+//------------------------------------------------------------------------------
 void InterpolateWaveform(Double_t ArrA[], Double_t ArrB[]) {
     for (int i=0; i<2048; i++) {
         if (i%2==0)
@@ -323,6 +368,9 @@ void InterpolateWaveform(Double_t ArrA[], Double_t ArrB[]) {
     }
 }
 
+//------------------------------------------------------------------------------
+// IntegrateCharge :: Integrate waveform around PeakBin to find total Qint
+//------------------------------------------------------------------------------
 void IntegrateCharge(Double_t chn[], int PeakBin, double& Qint) {
     int n=0;
     int m=0;
@@ -343,17 +391,28 @@ void IntegrateCharge(Double_t chn[], int PeakBin, double& Qint) {
     Qint=(Qint-Qped*m);
 }
 
+//------------------------------------------------------------------------------
+// PulseTime :: Calculate pulse cross times, width
+//------------------------------------------------------------------------------
 void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, double& CTHWidth, double& FTHWidth, double Vpeak, int PeakBin) {
 
     bool fth_rise, fth_fall, cth_rise, cth_fall;
     fth_rise=fth_fall=cth_rise=cth_fall=false;
     double chnInterp[2048];
 
+    //Interpolate 1024pt to 2048
     InterpolateWaveform(chn,chnInterp);
 
     CTHtime=FTHtime=CTHWidth=FTHWidth=0;
 
-    for (Int_t i=20; i<2028; i++)  //discard first and last 10 time bins
+#if LEADINGEDGEFIT>0
+    bool fth_rise_high=false; 
+    double FTHtime_high=0;
+    Double_t FTHtime_linear=0;
+    TH2F *wfm = new TH2F("wfm","waveform",225,0,225,1000,-500,500); //temp waveform
+#endif
+
+    for (Int_t i=20; i<2028; i++)  //discard first and last 10 time bins (noisy)
     {
         if ((i>2*(PeakBin-30)) && (i<2*(PeakBin+30))) {
 
@@ -370,11 +429,20 @@ void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, d
                 cth_fall=true;
             }
 
-            //Find Fractional Threshold Cross Time
+            //Find Fractional Threshold LOW Cross Time
             if ((fth_rise==false)&&(chnInterp[i]<(Vpeak*fraction))) {
                 FTHtime=t[i/2]+t[i%2]/2; 
                 fth_rise=true;
             }
+
+
+#if LEADINGEDGEFIT>0
+            //Find Fractional Threshold HIGH Cross Time
+            if ((fth_rise_high=false)&&(chnInterp[i]<(Vpeak*(1-fraction)))) {
+                FTHtime_high=t[i/2]+t[i%2]/2; 
+                fth_rise_high=true;
+            }
+#endif
 
             //FTH Pulse width
             if ((fth_rise==true) && (fth_fall==false) \
@@ -383,50 +451,83 @@ void PulseTime(Double_t chn[], Double_t t[], double& CTHtime, double& FTHtime, d
                 fth_fall=true;
             }
         }
+
+#if LEADINGEDGEFIT>0
+        //temp histogram for linearfit
+        wfm->Fill(t[i],chn[i]);
+#endif
+
     }
+
+    /* This routine performs a linear fit on the leading edge of the Pulse, 
+     * right now fitting on points between Vpeak*Frac to Vpeak*(1-Frac)
+     * The resulting linear fit is then used to find the crossing time. 
+     */
+
+#if LEADINGEDGEFIT>0
+    TF1 *linearfit = new TF1("linearfit","[0]*x+[1]", FTHtime,FTHtime_high);
+    wfm->Fit("linearfit","QN");
+    //linearfit->SetParameter(0, -8);
+    //linearfit->SetParameter(1, 100);
+
+    for (Double_t i=FTHtime; i<FTHtime_high; i++)
+    {
+        printf("\n Check =  %d", i);
+        if (linearfit->Eval(i) > Vpeak*fraction)
+        {
+            FTHtime_linear=i;
+            printf("\n CrossTime =  %d", i);
+            break;
+        }
+    }
+    wfm->Delete();
+#endif
 }
 
+//------------------------------------------------------------------------------
+// MakePlots :: Makes some interesting plots.. 
+//------------------------------------------------------------------------------
 void MakePlots(char* filename) {
     //open the root file
     TFile *rootfile = new TFile(Form("%s.root", filename),"UPDATE");
     TTree *rec = (TTree *)rootfile->Get("rec");
 
+    TH1F *fthtime = new TH1F("fthtime","Fractional Threshold Flighttime (Vpeak<-10)",101,-5,5);
+    fthtime->GetXaxis()->SetTitle("time (ns)");
+    rec->Draw("FTHFlightTime>>fthtime","(Vpeak0<-10 && Vpeak1<-10)","QN");
+    fthtime->Fit("gaus");
 
-    //TH1F *h1 = new TH1F("h1","Fractional Threshold Flighttime (Vpeak<-10)",43,-2,2);
-    //TH1F *h1 = new TH1F("h1","Fractional Threshold Flighttime (Vpeak<-10)",123,-6,6);
-    TH1F *h1 = new TH1F("h1","Fractional Threshold Flighttime (Vpeak<-10)",101,-5,5);
-    h1->GetXaxis()->SetTitle("time (ns)");
-    rec->Draw("FTHFlightTime>>h1","(Vpeak0<-10 && Vpeak1<-10)");
-    h1->Fit("gaus");
+    TH1F *cthtime = new TH1F("cthtime","Constant Threshold Flighttime (Vpeak<-10)",101,-5,5);
+    cthtime->GetXaxis()->SetTitle("time (ns)");
+    rec->Draw("CTHFlightTime>>cthtime","(Vpeak0<-10 && Vpeak1<-10)");
 
-    TH1F *h2 = new TH1F("h2","Constant Threshold Flighttime (Vpeak<-10)",101,-5,5);
-    h2->GetXaxis()->SetTitle("time (ns)");
-    rec->Draw("CTHFlightTime>>h2","(Vpeak0<-10 && Vpeak1<-10)");
+    /*
+       TH1F *h3 = new TH1F("h3","Fractional Threshold Flighttime (Vpeak<-100)",101,-5,5);
+       h3->GetXaxis()->SetTitle("time (ns)");
+       rec->Draw("FTHFlightTime>>h3","(Vpeak0<-100 && Vpeak1<-100)");
+       */
 
-    TH1F *h3 = new TH1F("h3","Fractional Threshold Flighttime (Vpeak<-100)",101,-5,5);
-    h3->GetXaxis()->SetTitle("time (ns)");
-    rec->Draw("FTHFlightTime>>h3","(Vpeak0<-100 && Vpeak1<-100)");
-
-    TF1 *sinefit = new TF1("sinefit","[0]*sin([1]*x+[2])", 0,200);
+    TF1 *sinefit = new TF1("sinefit","[0]*sin([1]*x+[2])+[3]", 0,200);
     sinefit->SetParameter(0, 80);
     sinefit->SetParameter(1, 0.15);
     sinefit->SetParameter(2, -8.2);
+    sinefit->SetParameter(3, 0);
 
 #if NCHN>0
-    TH2F *ch0 = new TH2F("ch0","channel0 trace",225,0,225,520,-500,20);
+    TH2F *ch0 = new TH2F("ch0","channel0 trace",225,0,225,620,-310,310);
     ch0->GetXaxis()->SetTitle("time (ns)");
     ch0->GetYaxis()->SetTitle("Voltage (mv)");
     rec->Draw("chn0:t>>ch0","(Vpeak0<-10)");
-    //ch0->Fit("sinefit");
+    ch0->Fit("sinefit");
     ch0->Write();
 #endif
 
 #if NCHN>1
-    TH2F *ch1 = new TH2F("ch1","channel1 trace",225,0,225,520,-500,20);
+    TH2F *ch1 = new TH2F("ch1","channel1 trace",225,0,225,620,-310,310);
     ch1->GetXaxis()->SetTitle("time (ns)");
     ch1->GetYaxis()->SetTitle("Voltage (mv)");
     rec->Draw("chn1:t>>ch1","(Vpeak1<-10)");
-    //ch1->Fit("sinefit");
+    ch1->Fit("sinefit");
     ch1->Write();
 #endif
 
@@ -454,10 +555,19 @@ void MakePlots(char* filename) {
     rec->Draw("abs(FTHFlightTime):abs(0.5*(Vpeak1+Vpeak0))>>hprof",
             "(Vpeak0<0 && Vpeak1<0)");
 
+    TF1 *linearfit = new TF1("linearfit","[0]*x+[1]", 0,220);
+    linearfit->SetParameter(0, 0.9);
+    linearfit->SetParameter(1, -10);
 
-    h1->Write();
-    h2->Write();
-    h3->Write();
+    TH2F *PeakCharge= new TH2F("PeakCharge","Pulse Amplitude vs. Integrated Charge",175,0,350,200,0,400);
+    PeakCharge->GetXaxis()->SetTitle("Pulse Amplitude (mV)");
+    PeakCharge->GetYaxis()->SetTitle("Integrated Charge (nC)");
+    rec->Draw("abs(10**-3 * Qint1*50):abs(Vpeak1)>>PeakCharge","(Vpeak1<-10)");
+    PeakCharge->Fit("linearfit");
+    PeakCharge->Write();
+
+    fthtime->Write();
+    cthtime->Write();
     hprof->Write();
 
     rootfile->Close();
