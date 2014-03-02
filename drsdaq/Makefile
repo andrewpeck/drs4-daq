@@ -1,9 +1,6 @@
 ########################################################
 #
-#  Makefile for drsosc, drscl and drs_exam 
-#  executables under linux
-#
-#  Requires wxWidgets 2.8.9 or newer
+#  Makefile for drsdaq for linux
 #
 ########################################################
 

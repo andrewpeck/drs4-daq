@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DRS4Config>
+<DRS4>
     <RunConfig 
         triglevel="-0.02" 
         trigsource="7"
@@ -10,6 +10,5 @@
         chnOn1="1"
         chnOn2="0"
         chnOn3="0"
-        posneg="0"
         ></RunConfig>
 </DRS4Config>
